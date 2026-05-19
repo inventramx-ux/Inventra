@@ -9,6 +9,7 @@ import { ClientProvider } from "./contexts/ClientContext"
 import { CurrencyProvider } from "./contexts/CurrencyContext"
 import { NextIntlClientProvider } from 'next-intl';
 import { getLocale, getMessages } from 'next-intl/server';
+import CookieConsent from "@/app/components/CookieConsent";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -43,6 +44,7 @@ export default async function RootLayout({
               <CurrencyProvider>
                 {children}
                 <Analytics />
+                <CookieConsent />
               </CurrencyProvider>
             </ClientProvider>
           </NextIntlClientProvider>

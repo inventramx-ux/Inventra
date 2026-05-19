@@ -64,8 +64,8 @@ export function ClientProvider({ children }: { children: ReactNode }) {
 
       if (error) throw error
       setClients((data || []).map(mapClient))
-    } catch (error) {
-      const message = error instanceof Error ? error.message : String(error)
+    } catch (error: any) {
+      const message = error?.message || (typeof error === 'object' ? JSON.stringify(error) : String(error))
       console.error("Error refreshing clients (full):", message)
       setClients([])
     } finally {
@@ -181,7 +181,7 @@ export function ClientProvider({ children }: { children: ReactNode }) {
             table: 'clients',
             filter: `user_id=eq.${user.id}`
           },
-          (payload) => {
+          (payload: any) => {
             if (payload.eventType === 'INSERT') {
               const newClient = mapClient(payload.new as ClientRow)
               setClients(prev => {

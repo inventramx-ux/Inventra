@@ -60,13 +60,16 @@ export default function DashboardPage() {
     return (
         <div className="space-y-8">
             {/* Welcome Section */}
-            <div>
-                <h1 className="text-2xl font-semibold text-white">
-                    {t('welcome', { name: user?.firstName || tc('user') })}
-                </h1>
-                <p className="text-gray-400 mt-1">
-                    {t('activitySummary')}
-                </p>
+            <div className="flex items-center gap-3.5">
+                <img src="/lpmini.png" alt="Inventra" className="h-8 w-auto object-contain shrink-0" />
+                <div>
+                    <h1 className="text-2xl font-semibold text-white leading-tight">
+                        {t('welcome', { name: user?.firstName || tc('user') })}
+                    </h1>
+                    <p className="text-gray-400 mt-0.5">
+                        {t('activitySummary')}
+                    </p>
+                </div>
             </div>
 
             {/* Stats Cards */}

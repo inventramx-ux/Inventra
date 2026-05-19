@@ -21,7 +21,7 @@ import { useCurrency } from "@/app/contexts/CurrencyContext"
 const proFeatures = [
     { icon: FileText, text: "Publicaciones ilimitadas" },
     { icon: Users, text: "Clientes ilimitados" },
-    { icon: Palette, text: "Analíticas avanzadas" },
+    { icon: Palette, text: "Métricas avanzadas" },
     { icon: Headphones, text: "Soporte prioritario" },
 ]
 

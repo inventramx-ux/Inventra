@@ -36,17 +36,17 @@ export function RevenueChart({ className }: RevenueChartProps) {
         <ResponsiveContainer width="100%" height={300}>
           <LineChart data={revenueData}>
             <CartesianGrid strokeDasharray="3 3" className="stroke-gray-200" />
-            <XAxis 
-              dataKey="month" 
+            <XAxis
+              dataKey="month"
               className="text-gray-600"
               tick={{ fontSize: 12 }}
             />
-            <YAxis 
+            <YAxis
               className="text-gray-600"
               tick={{ fontSize: 12 }}
               tickFormatter={(value) => `$${value}`}
             />
-            <Tooltip 
+            <Tooltip
               formatter={(value: number | undefined) => [`$${value?.toLocaleString() || 0}`, 'Ingresos']}
               contentStyle={{
                 backgroundColor: 'white',
@@ -54,10 +54,10 @@ export function RevenueChart({ className }: RevenueChartProps) {
                 borderRadius: '8px',
               }}
             />
-            <Line 
-              type="monotone" 
-              dataKey="revenue" 
-              stroke="#3b82f6" 
+            <Line
+              type="monotone"
+              dataKey="revenue"
+              stroke="#3b82f6"
               strokeWidth={2}
               dot={{ fill: '#3b82f6', r: 4 }}
               activeDot={{ r: 6 }}
@@ -80,31 +80,31 @@ export function ClientGrowthChart({ className }: RevenueChartProps) {
         <ResponsiveContainer width="100%" height={300}>
           <BarChart data={clientGrowthData}>
             <CartesianGrid strokeDasharray="3 3" className="stroke-gray-200" />
-            <XAxis 
-              dataKey="month" 
+            <XAxis
+              dataKey="month"
               className="text-gray-600"
               tick={{ fontSize: 12 }}
             />
-            <YAxis 
+            <YAxis
               className="text-gray-600"
               tick={{ fontSize: 12 }}
             />
-            <Tooltip 
+            <Tooltip
               contentStyle={{
                 backgroundColor: 'white',
                 border: '1px solid #e5e7eb',
                 borderRadius: '8px',
               }}
             />
-            <Bar 
-              dataKey="newClients" 
-              fill="#10b981" 
+            <Bar
+              dataKey="newClients"
+              fill="#10b981"
               name="Nuevos Clientes"
               radius={[4, 4, 0, 0]}
             />
-            <Bar 
-              dataKey="totalClients" 
-              fill="#6366f1" 
+            <Bar
+              dataKey="totalClients"
+              fill="#6366f1"
               name="Total Clientes"
               radius={[4, 4, 0, 0]}
             />

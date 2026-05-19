@@ -267,12 +267,6 @@ export default function AnalyticsPage() {
                     <CardContent className="h-[300px] w-full mt-4">
                         <ResponsiveContainer width="100%" height="100%">
                             <AreaChart data={stats.activityOverTime}>
-                                <defs>
-                                    <linearGradient id="colorActivity" x1="0" y1="0" x2="0" y2="1">
-                                        <stop offset="5%" stopColor="#60a5fa" stopOpacity={0.3} />
-                                        <stop offset="95%" stopColor="#60a5fa" stopOpacity={0} />
-                                    </linearGradient>
-                                </defs>
                                 <CartesianGrid strokeDasharray="3 3" stroke="#ffffff10" vertical={false} />
                                 <XAxis dataKey="label" stroke="#94a3b8" fontSize={12} tickLine={false} axisLine={false} />
                                 <YAxis stroke="#94a3b8" fontSize={12} tickLine={false} axisLine={false} />
@@ -281,7 +275,17 @@ export default function AnalyticsPage() {
                                     itemStyle={{ color: '#fff' }}
                                     labelStyle={{ color: '#fff' }}
                                 />
-                                <Area type="monotone" dataKey="count" name={t('publications')} stroke="#60a5fa" fillOpacity={1} fill="url(#colorActivity)" strokeWidth={3} />
+                                <Area
+                                    type="monotone"
+                                    dataKey="count"
+                                    name={t('publications')}
+                                    stroke="#3b82f6"
+                                    fill="#3b82f6"
+                                    fillOpacity={1}
+                                    strokeWidth={3}
+                                    dot={{ fill: '#3b82f6', r: 3, stroke: '#3b82f6', strokeWidth: 1 }}
+                                    activeDot={{ r: 5, fill: '#3b82f6', stroke: '#ffffff', strokeWidth: 1.5 }}
+                                />
                             </AreaChart>
                         </ResponsiveContainer>
                     </CardContent>
@@ -330,8 +334,8 @@ export default function AnalyticsPage() {
                         <CardDescription className="text-gray-400">{t('draftsVsFinal')}</CardDescription>
                     </CardHeader>
                     <CardContent className="h-[300px] w-full flex items-center justify-center">
-                            {!isPro && (
-                     <div className="absolute inset-0 z-10 flex flex-col items-center justify-center bg-black/60 backdrop-blur-sm p-6 text-center">
+                        {!isPro && (
+                            <div className="absolute inset-0 z-10 flex flex-col items-center justify-center bg-black/60 backdrop-blur-sm p-6 text-center">
                                 <Lock className="h-8 w-8 text-blue-400 mb-3" />
                                 <h3 className="text-blue-400 font-semibold mb-2">{t('proSection')}</h3>
                                 <p className="text-blue-400 text-sm mb-4">{t('proDraftsDesc')}</p>

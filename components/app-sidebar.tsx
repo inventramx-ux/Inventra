@@ -17,6 +17,7 @@ import {
     Mail,
     Copy,
     Check,
+    ChevronRight,
 } from "lucide-react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
@@ -127,6 +128,7 @@ export function AppSidebar() {
                                         <Link href={item.url}>
                                             <item.icon />
                                             <span>{title}</span>
+                                            <ChevronRight className="size-3.5 text-zinc-500 shrink-0 ml-auto group-data-[state=collapsed]:hidden" />
                                         </Link>
                                     </SidebarMenuButton>
                                 </SidebarMenuItem>
@@ -149,7 +151,7 @@ export function AppSidebar() {
                                     tooltip={t('support')}
                                     className="text-gray-300 hover:text-white hover:bg-white/10 h-auto py-2"
                                 >
-                                    <a href="mailto:inventramx@gmail.com" className="flex items-start gap-3">
+                                    <a href="mailto:inventramx@gmail.com" className="flex items-start gap-3 min-w-0 w-full">
                                         <div className="mt-1">
                                             <Mail className="size-4" />
                                         </div>
@@ -158,7 +160,7 @@ export function AppSidebar() {
                                             <span className="text-[10px] text-blue-400 truncate font-mono">
                                                 inventramx@gmail.com
                                             </span>
-                                            <span className="text-[9px] text-gray-500 leading-tight">
+                                            <span className="text-[9px] text-gray-500 leading-tight truncate">
                                                 {t('responseLess12h')}
                                             </span>
                                         </div>
@@ -186,6 +188,12 @@ export function AppSidebar() {
 
                 <SidebarSeparator className="bg-white/10" />
             </SidebarContent>
+
+            {/* SaaS Admin Dashboard Copyright Banner */}
+            <div className="mx-3 my-2 px-3.5 py-1 group-data-[state=collapsed]:hidden text-left select-none">
+                <p className="text-[11px] font-bold tracking-wide text-zinc-400">Inventra Dashboard</p>
+                <p className="text-[9px] text-zinc-600 mt-0.5">© {new Date().getFullYear()} Todos los derechos reservados</p>
+            </div>
 
             <SidebarFooter className="border-t border-white/10 p-2">
                 <SidebarMenu>

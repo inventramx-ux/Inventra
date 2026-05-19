@@ -1,6 +1,6 @@
 "use client";
 
-import React, { Suspense, useState } from "react";
+import React, { Suspense, useState, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useUser } from "@clerk/nextjs";
 import { useCurrency } from "@/app/contexts/CurrencyContext";
@@ -11,6 +11,7 @@ function CheckoutContent() {
   const { user } = useUser();
   const { proPrice } = useCurrency();
   const [isLoading, setIsLoading] = useState(false);
+  const [todayLabel, setTodayLabel] = useState<string>("");
   const [message, setMessage] = useState<{
     text: string;
     type: "success" | "error" | "info";
@@ -19,6 +20,15 @@ function CheckoutContent() {
       ? { text: "Pago cancelado. Puedes intentarlo de nuevo cuando quieras.", type: "info" }
       : null
   );
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const locale = navigator.language || "es-ES";
+    const now = new Date();
+    const formatter = new Intl.DateTimeFormat(locale, { day: "numeric", month: "long" });
+    const formatted = formatter.format(now);
+    setTodayLabel(formatted);
+  }, []);
 
   const handleCheckout = async () => {
     setIsLoading(true);
@@ -56,8 +66,10 @@ function CheckoutContent() {
       <div className="max-w-md w-full">
         <div className="bg-[#111111] rounded-2xl p-8 border border-[#1e1e1e]">
           {/* Header */}
-          <h1 className="text-2xl font-semibold text-white tracking-tight">Plan Pro</h1>
-          <p className="text-[#555] text-sm mt-1 mb-8">Inventra</p>
+          <h1 className="text-2xl font-semibold text-white tracking-tight">Inventra Pro</h1>
+          <p className="text-[#555] text-sm mt-1 mb-8  leading-[1.15] tracking-tight 
+bg-gradient-to-b from-white via-white to-gray-400
+bg-clip-text text-transparent">Inventra</p>
 
           {/* Plan details */}
           <div className="border border-[#1e1e1e] rounded-xl p-5 mb-6">
@@ -73,7 +85,7 @@ function CheckoutContent() {
 
           {/* Features */}
           <div className="space-y-2.5 mb-8">
-            {["Publicaciones ilimitadas", "Analíticas avanzadas", "Soporte prioritario"].map((feature) => (
+            {["Publicaciones ilimitadas", "Métricas avanzadas", "Soporte prioritario"].map((feature) => (
               <div key={feature} className="flex items-center gap-3 text-sm text-[#888]">
                 <span className="text-[#444]">—</span>
                 {feature}
