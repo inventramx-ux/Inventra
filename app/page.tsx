@@ -715,6 +715,7 @@ bg-clip-text text-transparent font-semibold" >
       {/* FAQ Section */}
       <section className="py-24 px-4 border-t border-white/10" id="faq">
         <div className="max-w-4xl mx-auto">
+          <h1 className="text-4xl font-semibold text-gray-400 mb-6">Inventra</h1>
           <h2 className="text-3xl font-semibold text-white mb-6">
             Preguntas Frecuentes
           </h2>
@@ -737,7 +738,7 @@ bg-clip-text text-transparent font-semibold" >
       <div className="aura lights">
        
   
-        <div className="h-90 w-full bg-[#2596be] rounded-[20px] text-center justify-center items-center flex flex-col gap-4 p-10">
+        <div className="h-90 w-full border-1 border-white bg-[#2596be] rounded-[20px] text-center justify-center items-center flex flex-col gap-4 p-10">
           <h1 className="font-semibold text-[25px]  leading-[1.15] tracking-tight 
 bg-gradient-to-b from-white via-white to-gray-400
 bg-clip-text text-transparent">Inventra</h1>
