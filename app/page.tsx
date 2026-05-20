@@ -715,9 +715,8 @@ bg-clip-text text-transparent font-semibold" >
       {/* FAQ Section */}
       <section className="py-24 px-4 border-t border-white/10" id="faq">
         <div className="max-w-4xl mx-auto">
-          <h1 className="text-4xl font-semibold text-gray-400 mb-6">Inventra</h1>
           <h2 className="text-3xl font-semibold text-white mb-6">
-            Preguntas Frecuentes
+            Preguntas Frecuentes - <span className="text-white/25">Preguntas y respuestas reales de nuestros usuarios </span>
           </h2>
           <p className="text-gray-400 mb-12">Preguntas, reclamos, inquietudes gestionadas por nuestros usuarios</p>
 
