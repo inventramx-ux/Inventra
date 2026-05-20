@@ -16,8 +16,8 @@ const reminders = [
         active: true,
     },
     {
-        title: "Factura vencida",
-        description: "Notificar al cliente cuando una factura ha vencido",
+        title: "Pago vencido",
+        description: "Notificar al cliente cuando un pago ha vencido",
         frequency: "Al vencer",
         channel: "Email",
         icon: Clock,
@@ -25,7 +25,7 @@ const reminders = [
     },
     {
         title: "Seguimiento de pago",
-        description: "Recordatorio semanal para facturas pendientes",
+        description: "Recordatorio semanal para pagos pendientes",
         frequency: "Semanal",
         channel: "Email + WhatsApp",
         icon: MessageSquare,

@@ -8,7 +8,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { ResponsiveContainer, AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, PieChart, Pie, Cell, BarChart, Bar, Legend } from "recharts"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { TrendingUp, ShoppingBag, Sparkles, Lock } from "lucide-react"
+import { TrendingUp, ShoppingBag, Sparkles } from "lucide-react"
 import Link from "next/link"
 import { publicationOperations, Publication } from "@/lib/publications"
 import { PublicationAnalyticsSection } from "@/components/publication-analytics-card"
@@ -305,11 +305,11 @@ export default function AnalyticsPage() {
                     <CardContent className="h-[300px] w-full mt-4">
                         {!isPro && (
                             <div className="absolute inset-0 z-10 flex flex-col items-center justify-center bg-black/60 backdrop-blur-sm p-6 text-center">
-                                <Lock className="h-8 w-8 text-blue-400 mb-3" />
-                                <h3 className="text-blue-400 font-semibold mb-2">{t('proSection')}</h3>
-                                <p className="text-blue-400 text-sm mb-4">{t('proChannelsDesc')}</p>
+                                <img src="/lpmini.png" alt="lpmini" className="h-8 w-8 mb-3" />
+                                <h3 className="text-white font-semibold mb-2">{t('proSection')}</h3>
+                                <p className="text-white text-sm mb-4">{t('proChannelsDesc')}</p>
                                 <Link href="/dashboard/upgrade">
-                                    <Button size="sm" className="bg-blue-400 hover:bg-blue-500 text-black text-xs font-bold">{t('upgradeNow')}</Button>
+                                    <Button size="sm" className="bg-white text-black hover:bg-gray-100 border-transparent text-xs font-bold">{t('upgradeNow')}</Button>
                                 </Link>
                             </div>
                         )}
@@ -336,11 +336,11 @@ export default function AnalyticsPage() {
                     <CardContent className="h-[300px] w-full flex items-center justify-center">
                         {!isPro && (
                             <div className="absolute inset-0 z-10 flex flex-col items-center justify-center bg-black/60 backdrop-blur-sm p-6 text-center">
-                                <Lock className="h-8 w-8 text-blue-400 mb-3" />
-                                <h3 className="text-blue-400 font-semibold mb-2">{t('proSection')}</h3>
-                                <p className="text-blue-400 text-sm mb-4">{t('proDraftsDesc')}</p>
+                                <img src="/lpmini.png" alt="lpmini" className="h-8 w-8 mb-3" />
+                                <h3 className="text-white font-semibold mb-2">{t('proSection')}</h3>
+                                <p className="text-white text-sm mb-4">{t('proDraftsDesc')}</p>
                                 <Link href="/dashboard/upgrade">
-                                    <Button size="sm" className="bg-blue-400 hover:bg-blue-500 text-black text-xs font-bold">{t('upgradeNow')}</Button>
+                                    <Button size="sm" className="bg-white text-black hover:bg-gray-100 border-transparent text-xs font-bold">{t('upgradeNow')}</Button>
                                 </Link>
                             </div>
                         )}

@@ -761,7 +761,7 @@ bg-clip-text text-transparent">Somos el mejor y unico ai para publicaciones en M
 
                 src="/inventralogo.png"
 
-                alt="Inventra Factura"
+                alt="Inventra"
 
                 width={120}
 
@@ -1071,7 +1071,7 @@ function InlineNavbar() {
             <Link href="/" className="flex items-center gap-2">
               <img
                 src="/inventralogo.png"
-                alt="Inventra Factura"
+                alt="Inventra"
                 width={32}
                 height={32}
                 className="h-8 w-auto"

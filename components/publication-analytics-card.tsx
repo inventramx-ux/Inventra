@@ -5,7 +5,6 @@ import { Publication } from "@/lib/publications"
 import { analyzePublication, getScoreColor } from "@/lib/publication-score"
 import { Card, CardContent, CardHeader } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { CheckCircle2, AlertCircle, Trophy, Lightbulb } from "lucide-react"
 import { useTranslations } from "next-intl"
 
 // ---------------------------------------------------------------------------
@@ -17,7 +16,7 @@ interface ScoreRingProps {
 }
 
 function ScoreRing({ score, size = 80 }: ScoreRingProps) {
-  const color = getScoreColor(score)
+  const color = "#3b82f6"
   const pct = (score / 100) * 360
 
   return (
@@ -59,25 +58,16 @@ function ScoreRing({ score, size = 80 }: ScoreRingProps) {
 }
 
 // ---------------------------------------------------------------------------
-// Platform badge colours
+// Platform badge styles
 // ---------------------------------------------------------------------------
-const PLATFORM_COLORS: Record<string, string> = {
-  "MercadoLibre": "#ffe900",
-  "Amazon":       "#ff9900",
-  "Facebook Marketplace": "#1877f2",
-  "Shopify":      "#96bf48",
-  "eBay":         "#e53238",
-}
+const APP_BLUE = "#3b82f6"
 
-function PlatformChip({ name, rank }: { name: string; rank: number }) {
-  const color = PLATFORM_COLORS[name] ?? "#60a5fa"
-  const medals = ["🥇", "🥈", "🥉"]
+function PlatformChip({ name, rank }: { name: string; rank?: number }) {
   return (
-    <div className="flex items-center gap-1.5">
-      <span className="text-sm">{medals[rank] ?? "•"}</span>
+    <div>
       <span
         className="text-xs font-semibold px-2 py-0.5 rounded-full"
-        style={{ background: color + "22", color, border: `1px solid ${color}44` }}
+        style={{ background: APP_BLUE + "22", color: APP_BLUE, border: `1px solid ${APP_BLUE}44` }}
       >
         {name}
       </span>
@@ -98,32 +88,17 @@ export function PublicationAnalyticsCard({ publication }: PublicationAnalyticsCa
   const analysis = useMemo(() => analyzePublication(publication), [publication])
   const scoreColor = getScoreColor(analysis.score)
 
-  const scoreLabel =
-    analysis.score >= 71
-      ? "✓"
-      : analysis.score >= 41
-      ? "~"
-      : "!"
-
   return (
     <Card className="bg-white/5 border-white/10 hover:bg-white/[0.07] transition-colors">
       <CardHeader className="pb-3">
         <div className="flex items-start justify-between gap-3 flex-wrap">
-          <div className="flex items-center gap-2 min-w-0">
-            <div
-              className="flex h-8 w-8 items-center justify-center rounded-lg shrink-0 text-sm font-bold"
-              style={{ background: `${scoreColor}20`, color: scoreColor }}
-            >
-              {scoreLabel}
-            </div>
-            <div className="min-w-0">
-              <p className="text-sm font-semibold text-white truncate">{publication.name}</p>
-              {publication.platform && (
-                <Badge className="mt-0.5 text-[10px] bg-white/10 border-white/10 text-gray-300">
-                  {publication.platform}
-                </Badge>
-              )}
-            </div>
+          <div className="min-w-0">
+            <p className="text-sm font-semibold text-white truncate">{publication.name}</p>
+            {publication.platform && (
+              <Badge className="mt-0.5 text-[10px] bg-white/10 border-white/10 text-gray-300">
+                {publication.platform}
+              </Badge>
+            )}
           </div>
           <ScoreRing score={analysis.score} size={72} />
         </div>
@@ -132,8 +107,7 @@ export function PublicationAnalyticsCard({ publication }: PublicationAnalyticsCa
       <CardContent className="space-y-4">
         {/* Best platforms */}
         <div>
-          <div className="flex items-center gap-1.5 mb-2">
-            <Trophy className="h-3.5 w-3.5 text-amber-400" />
+          <div className="mb-2">
             <span className="text-xs font-medium text-gray-300">{t("bestPlatforms")}</span>
           </div>
           <div className="flex flex-col gap-1.5">
@@ -146,24 +120,19 @@ export function PublicationAnalyticsCard({ publication }: PublicationAnalyticsCa
         {/* Suggestions */}
         {analysis.suggestionKeys.length > 0 && (
           <div>
-            <div className="flex items-center gap-1.5 mb-2">
-              <Lightbulb className="h-3.5 w-3.5 text-blue-400" />
+            <div className="mb-2">
               <span className="text-xs font-medium text-gray-300">{t("suggestions")}</span>
             </div>
-            <ul className="space-y-1.5">
+            <ul className="space-y-2 text-[11px] text-gray-400 leading-snug pl-0">
               {analysis.suggestionKeys.slice(0, 4).map((key) => (
-                <li key={key} className="flex items-start gap-1.5">
-                  <AlertCircle className="h-3 w-3 text-amber-400 shrink-0 mt-0.5" />
-                  <span className="text-[11px] text-gray-400 leading-snug">{t(key as any)}</span>
-                </li>
+                <li key={key}>{t(key as any)}</li>
               ))}
             </ul>
           </div>
         )}
 
         {analysis.suggestionKeys.length === 0 && (
-          <div className="flex items-center gap-1.5">
-            <CheckCircle2 className="h-3.5 w-3.5 text-emerald-400" />
+          <div>
             <span className="text-xs text-emerald-400">Listing fully optimized</span>
           </div>
         )}
@@ -195,9 +164,6 @@ export function PublicationAnalyticsSection({ publications, isPro }: Publication
       <div className="relative">
         {!isPro && (
           <div className="absolute inset-0 z-10 flex flex-col items-center justify-center bg-black/60 backdrop-blur-sm rounded-xl p-6 text-center">
-            <div className="h-10 w-10 rounded-xl bg-blue-500/10 flex items-center justify-center mb-3">
-              <Trophy className="h-5 w-5 text-blue-400" />
-            </div>
             <h3 className="text-blue-400 font-semibold mb-1">{t("proSectionPubs")}</h3>
             <p className="text-blue-400/80 text-sm mb-4 max-w-xs">{t("proSectionPubsDesc")}</p>
             <a

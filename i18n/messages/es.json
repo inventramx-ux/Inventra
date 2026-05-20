@@ -258,6 +258,8 @@
     "optimizedSuccess": "¡Publicación optimizada con éxito!",
     "errorOptimizing": "Error al optimizar con IA.",
     "errorConnection": "Error al conectar con la IA.",
+    "retryGuideHint": "Toca aquí para una guía rápida.",
+    "retryGuideText": "Simplemente reinicia la página o espera un rato, porque a veces los modelos de IA se traban.",
     "configSection": "Configuración de la Publicación",
     "mainImage": "Imagen Principal",
     "clickToUpload": "Pulsa para subir imagen principal",

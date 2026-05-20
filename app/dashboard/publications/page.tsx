@@ -19,7 +19,6 @@ import {
   ChevronUp,
   Loader2,
   AlertCircle,
-  CheckCircle2,
   Copy,
   Check,
   Maximize2
@@ -114,6 +113,7 @@ export default function PublicationsPage() {
   const [isOptimizing, setIsOptimizing] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
+  const [showRetryGuide, setShowRetryGuide] = useState(false);
   const [copyStatus, setCopyStatus] = useState<Record<string, boolean>>({});
   const [activeOptTool, setActiveOptTool] = useState<Record<string, string>>({});
   const [publicationsCount, setPublicationsCount] = useState(0);
@@ -251,6 +251,7 @@ export default function PublicationsPage() {
   const handleOptimize = async (pub: Publication) => {
     setIsOptimizing(pub.id);
     setError(null);
+    setShowRetryGuide(false);
 
     try {
       // 1. Batch Image Optimization
@@ -339,7 +340,7 @@ export default function PublicationsPage() {
       const data = await response.json();
 
       if (!response.ok) {
-        throw new Error(data.error || t('errorOptimizing'));
+        throw new Error('OPTIMIZE_FAILED');
       }
 
       // 3. Update both text and image in optimized_content
@@ -354,7 +355,11 @@ export default function PublicationsPage() {
       setTimeout(() => setSuccess(null), 3000);
     } catch (err: any) {
       console.error('Error in optimization flow:', err);
-      setError(err.message || t('errorConnection'));
+      const isConnectionError =
+        err instanceof TypeError ||
+        err.message?.toLowerCase().includes('failed to fetch') ||
+        err.message?.toLowerCase().includes('network');
+      setError(isConnectionError ? t('errorConnection') : t('errorOptimizing'));
     } finally {
       setIsOptimizing(null);
     }
@@ -426,27 +431,27 @@ export default function PublicationsPage() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
           >
-            <Alert variant="destructive" className="bg-red-500/10 border-red-500/20 text-red-400">
-              <AlertCircle className="h-4 w-4" />
+            <Alert
+              variant="destructive"
+              className="bg-red-500/10 border-red-500/20 text-red-400 cursor-pointer"
+              onClick={() => setShowRetryGuide((prev) => !prev)}
+            >
               <AlertTitle>Error</AlertTitle>
-              <AlertDescription>{error}</AlertDescription>
+              <AlertDescription>
+                <div>{error}</div>
+                <div className="mt-2 text-xs text-gray-200 text-center">
+                  {t('retryGuideHint')}
+                </div>
+                {showRetryGuide && (
+                  <div className="mt-3 rounded-md bg-white/10 border border-white/10 px-3 py-2 text-sm text-gray-100 text-center">
+                    {t('retryGuideText')}
+                  </div>
+                )}
+              </AlertDescription>
             </Alert>
           </motion.div>
         )}
 
-        {success && (
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-          >
-            <Alert className="bg-emerald-500/10 border-emerald-500/20 text-emerald-400">
-              <CheckCircle2 className="h-4 w-4" />
-              <AlertTitle>{tc('success')}</AlertTitle>
-              <AlertDescription>{success}</AlertDescription>
-            </Alert>
-          </motion.div>
-        )}
       </AnimatePresence>
 
       {loading ? (

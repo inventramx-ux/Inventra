@@ -148,10 +148,10 @@ export default function CookieConsent() {
               ¿Qué es Inventra?
             </h3>
             <p className="text-zinc-400 text-sm leading-relaxed">
-              Inventra es la forma más rápida y sencilla de gestionar tu facturación y optimizar tus publicaciones de e-commerce utilizando inteligencia artificial.
+              Inventra es la forma más rápida y sencilla de gestionar tus publicaciones y optimizar tu e-commerce utilizando inteligencia artificial.
             </p>
             <p className="text-zinc-400 text-sm leading-relaxed">
-              Diseñado para el comercio moderno: con plantillas profesionales, automatización de facturas y métricas avanzadas que te ayudan a hacer crecer tu negocio.
+              Diseñado para el comercio moderno: con plantillas profesionales, automatización de procesos y métricas avanzadas que te ayudan a hacer crecer tu negocio.
             </p>
             <button
               onClick={() => setShowAbout(false)}

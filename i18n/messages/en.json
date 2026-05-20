@@ -258,6 +258,8 @@
     "optimizedSuccess": "Listing optimized successfully!",
     "errorOptimizing": "Error optimizing with AI.",
     "errorConnection": "Error connecting to AI.",
+    "retryGuideHint": "Tap here for a quick guide.",
+    "retryGuideText": "Just refresh the page or wait a moment, because sometimes AI models get stuck.",
     "configSection": "Listing Configuration",
     "mainImage": "Main Image",
     "clickToUpload": "Click to upload main image",

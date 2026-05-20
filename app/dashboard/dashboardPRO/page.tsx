@@ -29,7 +29,7 @@ export default function EcommercePage() {
             id: "mercadolibre",
             name: "Mercado Libre",
             logo: "https://http2.mlstatic.com/frontend-assets/ml-web-navigation/ui-navigation/5.21.22/mercadolibre/logo__large_plus.png",
-            description: "Sincroniza tus ventas, inventario y facturación automáticamente.",
+            description: "Sincroniza tus ventas e inventario automáticamente.",
             status: "disconnected",
             primaryColor: "bg-[#ffe600] text-black hover:bg-[#ffe600]/90",
         },
@@ -37,7 +37,7 @@ export default function EcommercePage() {
             id: "amazon",
             name: "Amazon",
             logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Amazon_logo.svg/2560px-Amazon_logo.svg.png",
-            description: "Importa pedidos de Amazon Seller Central y genera facturas al instante.",
+            description: "Importa pedidos de Amazon Seller Central al instante.",
             status: "disconnected",
             primaryColor: "bg-[#FF9900] text-black hover:bg-[#FF9900]/90",
         },
@@ -131,12 +131,12 @@ export default function EcommercePage() {
     return (
         <ProGate
             featureName="Integraciones E-commerce"
-            featureDescription="Automatiza tu facturación conectando tus tiendas de Mercado Libre, Amazon y eBay."
+            featureDescription="Automatiza tu gestión conectando tus tiendas de Mercado Libre, Amazon y eBay."
         >
             <div className="space-y-6">
                 <div>
                     <h1 className="text-3xl font-bold tracking-tight text-white">Integraciones</h1>
-                    <p className="text-gray-400">Conecta tus tiendas online para automatizar tu facturación.</p>
+                    <p className="text-gray-400">Conecta tus tiendas online para automatizar tu gestión.</p>
                 </div>
 
                 <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">

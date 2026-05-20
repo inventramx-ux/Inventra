@@ -48,7 +48,7 @@ export default function LoadingAnimation() {
 
         {/* Loading text */}
         <h2 className="text-2xl font-semibold text-white mb-4 animate-fade-in-up">
-          Inventra Factura
+          Inventra
         </h2>
         
         <p className="text-gray-400 mb-8 animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
@@ -72,7 +72,7 @@ export default function LoadingAnimation() {
         <div className="space-y-3 animate-fade-in-up" style={{ animationDelay: '0.6s' }}>
           <div className="flex items-center gap-3 text-sm text-gray-400">
             <div className="w-4 h-4 bg-green-500 rounded-full animate-pulse"></div>
-            <span>Inicializando sistema de facturación</span>
+            <span>Inicializando el sistema</span>
           </div>
           <div className="flex items-center gap-3 text-sm text-gray-400">
             <div className="w-4 h-4 bg-blue-500 rounded-full animate-pulse" style={{ animationDelay: '0.3s' }}></div>

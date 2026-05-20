@@ -23,7 +23,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Inventra  ",
-  description: "Sistema de facturación moderno para tu negocio",
+  description: "Sistema moderno para tu negocio",
 };
 
 export default async function RootLayout({

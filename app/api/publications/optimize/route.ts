@@ -51,7 +51,7 @@ export async function POST(request: Request) {
   } catch (error: any) {
     console.error('Error in optimization API:', error);
     return NextResponse.json(
-      { error: error.message || 'Error al procesar la optimización.' },
+      { error: 'Error al optimizar la publicación.' },
       { status: 500 }
     );
   }
