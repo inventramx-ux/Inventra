@@ -174,7 +174,6 @@ export default function Home() {
 
 
             <div className="relative">
-
               <h1 className="text-center text-5xl md:text-6xl lg:text-7xl font-semibold mb-6 leading-[1.15] tracking-tight 
 bg-gradient-to-b from-white via-white to-gray-400
 bg-clip-text text-transparent pb-2 mt-10">
@@ -395,13 +394,12 @@ bg-clip-text text-transparent font-semibold" >
               </div>
 
               <div className="pt-6">
-                <div className="flex items-center gap-3 mb-3">
-                  <div className="p-2 rounded-full w-10 h-10 flex shrink-0 justify-center items-center text-center bg-white/10 text-white">
-                    <p className="font-bold">1</p>
-                  </div>
-                  <h3 className="text-xl font-bold text-white tracking-tight ">Optimización de publicaciones</h3>
+                                <p className="text-gray-400 font-bold text-lg text-sm">INVENTRA</p>
+
+                <div className="flex items-center gap-3">
+                  <h3 className="font-semibold lg:text-[30px] leading-[1.15] tracking-tight bg-gradient-to-b from-white via-white to-gray-400 bg-clip-text text-transparent">Optimización de publicaciones</h3>
                 </div>
-                <p className="text-gray-400 text-sm leading-relaxed">
+                <p className="text-gray-400 text-sm leading-relaxed mt-2">
                   Optimiza el título y descripción de tus publicaciones con IA y mejora el posicionamiento de tus productos.
                 </p>
               </div>
@@ -470,13 +468,11 @@ bg-clip-text text-transparent font-semibold" >
 
               </div>
               <div className="pt-6">
-                <div className="flex items-center gap-3 mb-3">
-                  <div className="p-2 rounded-full w-10 h-10 flex shrink-0 justify-center items-center text-center bg-white/10 text-white">
-                    <p className="font-bold">2</p>
-                  </div>
-                  <h3 className="text-xl font-bold text-white tracking-tight">Optimización de Imágenes</h3>
+                  <p className="text-gray-400 font-bold text-lg text-sm">INVENTRA</p>
+                <div className="flex items-center gap-3">
+                  <h3 className="font-semibold lg:text-[30px] leading-[1.15] tracking-tight bg-gradient-to-b from-white via-white to-gray-400 bg-clip-text text-transparent">Optimización de Imágenes.</h3>
                 </div>
-                <p className="text-gray-400 text-sm leading-relaxed">
+                <p className="text-gray-400 text-sm leading-relaxed mt-2">
                   Transforma tus fotos en imágenes de estudio. Elimina fondos, aumenta resolución y mejora colores con IA quirúrgica.
                 </p>
               </div>
@@ -550,13 +546,13 @@ bg-clip-text text-transparent font-semibold" >
               </div>
 
               <div className="pt-6">
-                <div className="flex items-center gap-3 mb-3">
-                  <div className="p-2 rounded-full w-10 h-10 flex shrink-0 justify-center items-center text-center bg-white/10 text-white">
-                    <p className="font-bold">3</p>
-                  </div>
-                  <h3 className="text-xl font-bold text-white tracking-tight">Métricas avanzadas</h3>
+                
+                                <p className="text-gray-400 font-bold text-lg text-sm">INVENTRA</p>
+
+                <div className="flex items-center gap-3">
+                  <h3 className="font-semibold lg:text-[30px] leading-[1.15] tracking-tight bg-gradient-to-b from-white via-white to-gray-400 bg-clip-text text-transparent">Métricas avanzadas.</h3>
                 </div>
-                <p className="text-gray-400 text-sm leading-relaxed">
+                <p className="text-gray-400 text-sm leading-relaxed mt-2">
                   Obtén métricas sobre tus publicaciones y mejora el posicionamiento de tus productos.
                 </p>
               </div>
@@ -572,8 +568,8 @@ bg-clip-text text-transparent font-semibold" >
         <div className="max-w-4xl mx-auto">
 
           <div className="mb-16">
-
-            <h2 className="text-3xl font-medium text-white mb-4">
+<p className="text-gray-400 font-medium text-lg text-sm">LAS 4 FUNCIONES PRINCIPALES</p>
+            <h2 className="mt-5 text-3xl font-medium  mb-4 font-semibold lg:text-[30px] leading-[1.15] tracking-tight bg-gradient-to-b from-white via-white to-gray-400 bg-clip-text text-transparent">
               Todo lo que necesitas para optimizar tus publicaciones
             </h2>
 
@@ -713,10 +709,13 @@ bg-clip-text text-transparent font-semibold" >
 
 
       {/* FAQ Section */}
-      <section className="py-24 px-4 border-t border-white/10" id="faq">
+      <section className="py-24 px-4 border-t border-white/10 " id="faq">
         <div className="max-w-4xl mx-auto">
+          <h1 className="text-[20px] text-gray-400 line-clamp-2">PREGUNTAS FREQUENTES</h1>
           <h2 className="text-3xl font-semibold text-white mb-6">
-            Preguntas Frecuentes - <span className="text-white/25">Preguntas y respuestas reales de nuestros usuarios </span>
+            <span className="block max-w-[600px] text-white/25 lg:text-[50px] font-semibold mb-6 leading-[1.15] tracking-tight 
+bg-gradient-to-b from-white via-white to-gray-400 
+bg-clip-text text-transparent pb-2">Preguntas y respuestas reales de nuestros usuarios </span>
           </h2>
           <p className="text-gray-400 mb-12">Preguntas, reclamos, inquietudes gestionadas por nuestros usuarios</p>
 
