@@ -157,7 +157,13 @@ export default function Home() {
 
 
 
-      <section className="pt-32 md:pt-40 pb-12 md:pb-20 relative z-10 overflow-x-clip">
+      <motion.section 
+        className="pt-32 md:pt-40 pb-12 md:pb-20 relative z-10 overflow-x-clip"
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
+        viewport={{ once: true, amount: 0.3 }}
+      >
         <div
           className={cn(
             "absolute inset-x-0 top-0 h-[800px] -z-10",
@@ -261,10 +267,16 @@ bg-clip-text text-transparent pb-2 mt-10">
 
         </div>
 
-      </section>
+      </motion.section>
 
       {/* Logos Section */}
-      <section className="py-12 border-t border-white/10">
+      <motion.section 
+        className="py-12 border-t border-white/10"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        transition={{ duration: 0.5, ease: "easeOut" }}
+        viewport={{ once: true, amount: 0.3 }}
+      >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <p className="text-center text-sm font-medium text-gray-500 mb-8 uppercase tracking-widest">
             Usado por vendedores en empresas como
@@ -316,9 +328,16 @@ bg-clip-text text-transparent pb-2 mt-10">
             />
           </div>
         </div>
-      </section>
+      </motion.section>
 
-      <section id="premium-features" className="py-24 px-4 border-t border-white/10 relative overflow-hidden bg-black/20">
+      <motion.section 
+        id="premium-features" 
+        className="py-24 px-4 border-t border-white/10 relative overflow-hidden bg-black/20"
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
+        viewport={{ once: true, amount: 0.2 }}
+      >
         <div className="max-w-7xl mx-auto">
           {/* Header with Title and Button */}
           <div className="flex flex-col md:flex-row items-start items-start md:items-center justify-between gap-6 mb-16 px-4">
@@ -559,11 +578,18 @@ bg-clip-text text-transparent font-semibold" >
             </div>
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* Features Section */}
 
-      <section id="features" className="py-20 px-4 border-t border-white/10">
+      <motion.section 
+        id="features" 
+        className="py-20 px-4 border-t border-white/10"
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
+        viewport={{ once: true, amount: 0.3 }}
+      >
 
         <div className="max-w-4xl mx-auto">
 
@@ -600,13 +626,20 @@ bg-clip-text text-transparent font-semibold" >
 
         </div>
 
-      </section>
+      </motion.section>
 
 
 
       {/* Pricing Section */}
 
-      <section id="pricing" className="py-20 px-4 border-t border-white/10">
+      <motion.section 
+        id="pricing" 
+        className="py-20 px-4 border-t border-white/10"
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
+        viewport={{ once: true, amount: 0.3 }}
+      >
 
         <div className="max-w-5xl mx-auto">
 
@@ -630,12 +663,12 @@ bg-clip-text text-transparent font-semibold" >
 
               <div key={index} className="relative overflow-visible">
                 {plan.name === 'Pro' && (
-                  <div className="absolute left-1/2 -top-3 -translate-x-1/2 rounded-full bg-[#2596be] px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-white shadow-[0_14px_45px_rgba(59,130,246,0.25)]">
+                  <div className="absolute left-1/2 -top-3 -translate-x-1/2 rounded-full bg-[#c0c0c0] px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-black shadow-[0_14px_45px_rgba(192,192,192,0.4)]">
                     AHORRA UN 33%
                   </div>
                 )}
 
-                <div className={`flex flex-col p-6 md:p-8 rounded-2xl border  transition-all ${plan.highlighted ? 'border-white/30 bg-white/5 ring-1 ring-white/10 scale-100 md:scale-105' : ' border-2 border-[#2596be] bg-black/40'}`}>
+                <div className={`flex flex-col p-6 md:p-8 rounded-2xl border  transition-all ${plan.highlighted ? 'border-white/30 bg-white/5 ring-1 ring-white/10 scale-100' : ' border-2 border-[#c0c0c0] bg-black/40 shadow-[0_0_30px_rgba(192,192,192,0.3)]'}`}>
 
                   <div className="mb-6 pt-3">
 
@@ -704,12 +737,19 @@ bg-clip-text text-transparent font-semibold" >
 
         </div>
 
-      </section>
+      </motion.section>
 
 
 
       {/* FAQ Section */}
-      <section className="py-24 px-4 border-t border-white/10 " id="faq">
+      <motion.section 
+        className="py-24 px-4 border-t border-white/10" 
+        id="faq"
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
+        viewport={{ once: true, amount: 0.3 }}
+      >
         <div className="max-w-4xl mx-auto">
           <h1 className="text-[20px] text-gray-400 line-clamp-2">PREGUNTAS FREQUENTES</h1>
           <h2 className="text-3xl font-semibold text-white mb-6">
@@ -725,7 +765,7 @@ bg-clip-text text-transparent pb-2">Preguntas y respuestas reales de nuestros us
             ))}
           </div>
         </div>
-      </section>
+      </motion.section>
 
 
  
@@ -736,7 +776,7 @@ bg-clip-text text-transparent pb-2">Preguntas y respuestas reales de nuestros us
       <div className="aura lights">
        
   
-        <div className="h-90 w-full border-1 border-white bg-[#2596be] rounded-[20px] text-center justify-center items-center flex flex-col gap-4 p-10">
+        <div className="h-90 w-full border-1 border-white/10 bg-black/40 rounded-[20px] text-center justify-center items-center flex flex-col gap-4 p-10">
           <h1 className="font-semibold text-[25px]  leading-[1.15] tracking-tight 
 bg-gradient-to-b from-white via-white to-gray-400
 bg-clip-text text-transparent">Inventra</h1>
@@ -1125,14 +1165,14 @@ function InlineNavbar() {
               <>
                 <SignedOut>
                   <SignInButton>
-                    <a className="px-6 py-2 text-sm font-semibold text-white bg-white/10 hover:bg-white/20 rounded-lg transition-all duration-200 cursor-pointer">Iniciar Sesión</a>
+                    <a className="px-6 py-2 text-sm font-semibold text-white bg-white/10  rounded-lg transition-all duration-200 cursor-pointer">Iniciar Sesión</a>
                   </SignInButton>
                   <SignUpButton>
-                    <a className="bg-[#2596be] text-white font-medium py-2 px-6 rounded-lg text-sm cursor-pointer ml-2">Registrarse</a>
+                    <a className="bg-white text-black font-medium py-2 px-6 rounded-lg text-sm cursor-pointer ml-2">Registrarse</a>
                   </SignUpButton>
                 </SignedOut>
                 <SignedIn>
-                  <Link href="/dashboard" className="bg-[#2596be] text-white font-medium py-2 px-6 rounded-lg hover:bg-[#1d7a9d] transition-colors text-sm">
+                  <Link href="/dashboard" className="bg-white text-black font-medium py-2 px-6 rounded-lg ] transition-colors text-sm">
                     Dashboard
                   </Link>
                   <UserButton afterSignOutUrl="/" appearance={{ elements: { avatarBox: 'w-9 h-9' } }} />
