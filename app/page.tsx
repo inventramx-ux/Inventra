@@ -4,7 +4,7 @@ import { FaTiktok } from "react-icons/fa";
 import { cn } from "@/lib/utils";
 import { motion } from "motion/react";
 import { AuroraBackground } from "@/components/ui/aurora-background";
-
+import { useLocale } from "next-intl";
 
 import { useEffect, useState, useRef } from 'react';
 
@@ -17,6 +17,7 @@ import { Badge } from "@/components/ui/badge";
 import { SignedIn, SignedOut, UserButton, SignInButton, SignUpButton, useAuth } from '@clerk/nextjs';
 import { animate } from 'framer-motion';
 import { useCurrency } from "@/app/contexts/CurrencyContext";
+import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 
 
 
@@ -70,6 +71,7 @@ const blueAreaPath = [
 export default function Home() {
   const { isLoaded } = useAuth();
   const { proPrice, currency } = useCurrency();
+  const currentLocale = useLocale();
 
   const features = [
     {
@@ -102,8 +104,8 @@ export default function Home() {
     },
     {
       name: 'Pro',
-      price: '$199',
-      period: '/mes',
+      price: '$15',
+      period: '/month',
       description: 'Para negocios serios',
       features: ['Publicaciones ilimitadas', 'Métricas ilimitadas', 'Soporte prioritario'],
       cta: 'Comenzar ahora',
@@ -137,8 +139,8 @@ export default function Home() {
       answer: 'Ofrecemos un plan gratuito para empezar y un plan Pro con publicaciones ilimitadas y soporte prioritario.',
     },
     {
-      question: '¿Están hechos para México?',
-      answer: 'Sí, Inventra está diseñado pensando en México y Latinoamérica, con especial atención a las plataformas populares de la región.',
+      question: '¿Funciona a nivel global?',
+      answer: 'Sí, Inventra funciona globalmente para cualquier vendedor de e-commerce en cualquier país.',
     },
   ];
 
@@ -403,9 +405,9 @@ bg-clip-text text-transparent font-semibold" >
                   <div className="p-4 rounded-xl bg-white/[0.03] border border-white/10 space-y-2 mt-auto">
                     <h5 className="text-[10px] font-bold text-zinc-500 uppercase tracking-wider">PRECIO SUGERIDO POR IA</h5>
                     <div className="flex items-center justify-between gap-4">
-                      <span className="text-2xl font-bold text-white tracking-tight">MX$12,999.00</span>
+                      <span className="text-2xl font-bold text-white tracking-tight">$12,999.00</span>
                       <div className="flex items-center gap-2 px-3 py-1.5 bg-zinc-900 border border-white/10 rounded-lg text-xs font-medium text-zinc-400">
-                        MXN <ChevronDown size={14} className="opacity-50" />
+                        USD <ChevronDown size={14} className="opacity-50" />
                       </div>
                     </div>
                   </div>
@@ -739,7 +741,141 @@ bg-clip-text text-transparent font-semibold" >
 
       </motion.section>
 
+<motion.section 
+  className="py-24 px-4 border-t border-white/10"
+  initial={{ opacity: 0, y: 40 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.6, ease: "easeOut" }}
+  viewport={{ once: true, amount: 0.3 }}
+>
+  <div className="max-w-6xl mx-auto">
+    <div className="mb-16">
+      <p className="text-gray-400 font-medium text-sm uppercase tracking-widest mb-4">DEL PENSAMIENTO AL ACCION</p>
+      <h2 className="text-4xl md:text-5xl font-semibold mb-4 leading-[1.15] tracking-tight bg-gradient-to-b from-white via-white to-gray-400 bg-clip-text text-transparent">
+        Así es como se usa Inventra
+      </h2>
+      <p className="text-gray-400 text-lg max-w-2xl">
+        Este es un ejemplo real de una publicación creada con Inventra optimizada para ecommerce
+      </p>
+    </div>
 
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+      {/* Description */}
+      <div className="space-y-6">
+        <div className="space-y-4">
+          <div className="flex items-start gap-4">
+            <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-gray-500/20 border border-gray-500/40 flex items-center justify-center">
+              <span className="text-gray-400 font-bold text-lg">1</span>
+            </div>
+            <div>
+              <h3 className="text-white font-semibold mb-2">Ingresa los datos del producto</h3>
+              <p className="text-gray-400 text-sm">Proporciona información básica como nombre, descripción y características del artículo</p>
+            </div>
+          </div>
+          <div className="flex items-start gap-4">
+            <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-gray-500/20 border border-gray-500/40 flex items-center justify-center">
+              <span className="text-gray-400 font-bold text-lg">2</span>
+            </div>
+            <div>
+              <h3 className="text-white font-semibold mb-2">La IA optimiza automáticamente</h3>
+              <p className="text-gray-400 text-sm">Nuestro modelo genera títulos atractivos y descripciones convincentes para vender más rápido</p>
+            </div>
+          </div>
+          <div className="flex items-start gap-4">
+            <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-gray-500/20 border border-gray-500/40 flex items-center justify-center">
+              <span className="text-gray-400 font-bold text-lg">3</span>
+            </div>
+            <div>
+              <h3 className="text-white font-semibold mb-2">Publica en tu plataforma</h3>
+              <p className="text-gray-400 text-sm">Copia la publicación optimizada y publícala en Mercado Libre, Facebook o tu tienda en línea</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* iPhone Mockup */}
+      <div className="flex justify-center">
+        <div className="relative">
+          {/* iPhone Frame */}
+          <div className="w-72 bg-black rounded-[48px] shadow-2xl relative overflow-hidden" style={{ aspectRatio: '9/19.5' }}>
+            {/* Notch */}
+            <div className="absolute top-3 left-1/2 -translate-x-1/2 w-32 h-6 bg-black rounded-b-3xl z-10"></div>
+            
+            {/* Screen Content */}
+            <div className="absolute inset-0 bg-white rounded-[44px] overflow-hidden flex flex-col m-[6px]">
+              {/* Status Bar */}
+              <div className="bg-white h-6 flex items-center justify-between px-6 text-[10px] font-semibold text-gray-800">
+                <span>9:41</span>
+                <span>●●●●●</span>
+              </div>
+
+              {/* Product Content */}
+              <div className="flex-1 overflow-y-auto p-4 space-y-3">
+                {/* Product Image Container */}
+                <div className="aspect-square w-full bg-gradient-to-br from-gray-100 to-gray-200 rounded-lg border border-gray-300 flex items-center justify-center">
+                  <div className="flex flex-col items-center gap-2">
+                    <svg className="w-12 h-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                    </svg>
+                    <span className="text-[11px] text-gray-500 font-medium">Imagen del producto</span>
+                  </div>
+                </div>
+
+                {/* Product Title */}
+                <div className="space-y-1">
+                  <h3 className="text-sm font-bold text-gray-900 leading-tight">
+                    iPhone 15 Pro Max — Cámara Profesional y Rendimiento Ultrarrápido
+                  </h3>
+                </div>
+
+                {/* Rating */}
+                <div className="flex items-center gap-2">
+                  <div className="flex gap-0.5">
+                    {[...Array(5)].map((_, i) => (
+                      <span key={i} className="text-yellow-400 text-xs">★</span>
+                    ))}
+                  </div>
+                  <span className="text-[11px] text-gray-500">(2.4k reviews)</span>
+                </div>
+
+                {/* Price Section */}
+                <div className="bg-blue-50 rounded-lg p-3 space-y-1">
+                  <div className="flex items-baseline gap-2">
+                    <span className="text-lg font-bold text-gray-900">$24,999</span>
+                    <span className="text-xs text-gray-500 line-through">$28,999</span>
+                  </div>
+                  <span className="text-[10px] text-green-700 font-semibold">14% de descuento</span>
+                </div>
+
+                {/* Description */}
+                <div className="space-y-2">
+                  <div className="flex items-start gap-2">
+                    <svg className="w-4 h-4 text-blue-600 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M18 5v8a2 2 0 01-2 2h-5l-5 4v-4H4a2 2 0 01-2-2V5a2 2 0 012-2h12a2 2 0 012 2zm-11-1h2v2H7V4zm2 4H7v2h2V8zm2-4h2v2h-2V4zm2 4h-2v2h2V8z" />
+                    </svg>
+                    <p className="text-[11px] text-gray-700 leading-tight flex-1">
+                      Procesador A18 Pro de última generación, pantalla OLED 6.9", batería de hasta 33 horas
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Buy Button */}
+              <div className="bg-white border-t border-gray-200 p-3">
+                <button className="w-full bg-blue-600 text-white py-2.5 rounded-lg font-semibold text-sm hover:bg-blue-700 transition-colors">
+                  Comprar Ahora
+                </button>
+              </div>
+            </div>
+          </div>
+
+          {/* Glow Effect */}
+          <div className="absolute inset-0 rounded-[48px] bg-gradient-to-r from-blue-500/20 to-purple-500/20 blur-2xl -z-10"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</motion.section>
 
       {/* FAQ Section */}
       <motion.section 
@@ -777,15 +913,19 @@ bg-clip-text text-transparent pb-2">Preguntas y respuestas reales de nuestros us
        
   
         <div className="h-90 w-full border-1 border-white/10 bg-black/40 rounded-[20px] text-center justify-center items-center flex flex-col gap-4 p-10">
-          <h1 className="font-semibold text-[25px]  leading-[1.15] tracking-tight 
+          <h1 className="font-semibold text-[25px]  leading-[1.15] tracking-tight
 bg-gradient-to-b from-white via-white to-gray-400
 bg-clip-text text-transparent">Inventra</h1>
-          <h2 className="font-semibold text-[50px]  leading-[1.15] tracking-tight 
+          <h2 className="font-semibold text-[50px]  leading-[1.15] tracking-tight
 bg-gradient-to-b from-white via-white to-gray-400
-bg-clip-text text-transparent">Crea Publicaciones con IA 🤖 </h2>
-          <h3 className=" leading-[1.15] tracking-tight 
+bg-clip-text text-transparent">
+            {currentLocale === 'es' ? 'Crea Publicaciones con IA 🤖' : 'Create Listings with AI 🤖'}
+          </h2>
+          <h3 className=" leading-[1.15] tracking-tight
 bg-gradient-to-b from-white via-white to-gray-400
-bg-clip-text text-transparent">Somos el mejor y unico ai para publicaciones en Mexico</h3>
+bg-clip-text text-transparent">
+            {currentLocale === 'es' ? 'El mejor AI para publicaciones de e-commerce en el mundo' : 'The best AI for e-commerce listings worldwide'}
+          </h3>
 
         </div>
       </div>
@@ -1156,7 +1296,8 @@ function InlineNavbar() {
 
           </div>
 
-          <div className="hidden md:flex items-center gap-4 min-w-[200px] justify-end">
+          <div className="hidden md:flex items-center gap-4 min-w-[280px] justify-end">
+            <LanguageSwitcher />
             {!isLoaded ? (
               <div className="flex items-center gap-4">
                 <a className="px-6 py-2 text-sm font-semibold text-white bg-white/10 hover:bg-white/20 rounded-lg transition-all duration-200 cursor-pointer">Iniciar Sesión</a>

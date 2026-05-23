@@ -43,13 +43,13 @@ export function CurrencyProvider({ children }: { children: React.ReactNode }) {
     initCurrency();
   }, []);
 
-  // Default to MX logic unless detected otherwise
-  const countryCode = location?.country_code || "MX";
-  const isMX = countryCode === "MX";
-  const currency = isMX ? "MXN" : "USD";
+  // Global pricing in USD
+  const countryCode = location?.country_code || "US";
+  const isMX = false;
+  const currency = "USD";
 
-  // Fixed prices with currency suffix as requested
-  const proPrice = isMX ? "$199 MXN" : "$9.99 USD";
+  // Fixed global price
+  const proPrice = "$15 USD";
 
   /**
    * Helper to format a number to its currency string.

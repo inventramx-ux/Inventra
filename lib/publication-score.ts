@@ -53,7 +53,7 @@ function rankPlatforms(pub: Publication): string[] {
     scores['MercadoLibre'] += 10
   }
 
-  // MSI heavily prefers MercadoLibre (Mexico feature)
+  // Installment plans boost MercadoLibre
   if (hasMsi) scores['MercadoLibre'] += 25
 
   // Background removed → Amazon loves clean images

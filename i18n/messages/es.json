@@ -109,8 +109,8 @@
       "a5": "Inventra está específicamente diseñado para crear publicaciones de e-commerce. Utiliza formatos optimizados, estructuras de venta probadas y datos actualizados de las plataformas para generar publicaciones listas para publicar.",
       "q6": "¿Qué tipos de planes tiene Inventra?",
       "a6": "Inventra está específicamente diseñado para crear publicaciones de e-commerce. Utiliza formatos optimizados, estructuras de venta probadas y datos actualizados de las plataformas para generar publicaciones listas para publicar.",
-      "q7": "¿Están hechos para México?",
-      "a7": "Sí, aunque servimos a clientes globales, Inventra está diseñado con especial atención a las plataformas populares en México y Latinoamérica."
+      "q7": "¿Funciona a nivel global?",
+      "a7": "Sí, Inventra funciona globalmente para cualquier vendedor de e-commerce en cualquier país."
     },
     "footer": {
       "copyright": "Inventra."
@@ -239,7 +239,7 @@
     "fiveClients": "5 clientes",
     "basicTemplates": "Plantillas básicas",
     "emailSupport": "Soporte por email",
-    "upgradeToPro": "Actualizar a Pro — $199/mes",
+    "upgradeToPro": "Actualizar a Pro — $15/mes",
     "accountTitle": "Cuenta"
   },
   "publications": {
