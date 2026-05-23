@@ -4,7 +4,7 @@ import { FaTiktok } from "react-icons/fa";
 import { cn } from "@/lib/utils";
 import { motion } from "motion/react";
 import { AuroraBackground } from "@/components/ui/aurora-background";
-import { useLocale } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 
 import { useEffect, useState, useRef } from 'react';
 
@@ -72,75 +72,76 @@ export default function Home() {
   const { isLoaded } = useAuth();
   const { proPrice, currency } = useCurrency();
   const currentLocale = useLocale();
+  const t = useTranslations('landing');
 
   const features = [
     {
-      title: 'Optimización de publicaciones',
-      description: 'Optimiza tus publicaciones con IA, tomando en cuenta palabras clave, descripciones y títulos para vender más rápido.',
+      title: t('features.feature1Title'),
+      description: t('features.feature1Description'),
     },
     {
-      title: 'Metricas',
-      description: 'Metricas globales de todas tus tiendas de e-commerce. Ademas te damos las medricas tus publicacionmes generadas.',
+      title: t('features.feature1Title'),
+      description: t('features.feature1Description'),
     },
       {
-      title: 'Edicion de imagenes',
-      description: 'Herramienta de edicion integrada para mejorar tus imagenes con cosas como calidad filtros y mas.',
+      title: t('features.feature1Title'),
+      description: t('features.feature1Description'),
     },
       {
-      title: 'Valor Real',
-      description: 'Entre subscripciones de IA y varias herramientas hace sentido para tu billetera y negocio usar inventra tienes todo en un lugar y las IA estan incluidas en el precio.',
+      title: t('features.feature1Title'),
+      description: t('features.feature1Description'),
     },
   ];
 
   const plans = [
     {
-      name: 'Gratuito',
-      price: '$0',
-      period: '/mes',
-      description: 'Perfecto para empezar',
-      features: ['Hasta 3 publicaciones por mes', 'Métricas limitadas', 'Soporte por email'],
-      cta: 'Comenzar gratis',
+      name: t('pricing.freeName'),
+      price: t('pricing.freePrice'),
+      period: '/month',
+      description: t('pricing.freeDescription'),
+      features: [t('pricing.freeFeature1'), t('pricing.freeFeature2'), t('pricing.freeFeature3')],
+      cta: t('pricing.freeCta'),
       highlighted: true,
     },
     {
-      name: 'Pro',
+      name: t('pricing.proName'),
       price: '$15',
       period: '/month',
-      description: 'Para negocios serios',
-      features: ['Publicaciones ilimitadas', 'Métricas ilimitadas', 'Soporte prioritario'],
-      cta: 'Comenzar ahora',
+      description: t('pricing.proDescription'),
+      features: [t('pricing.proFeature1'), t('pricing.proFeature2'), t('pricing.proFeature3')],
+      cta: t('pricing.proCta'),
       highlighted: false,
     },
   ];
 
   const faqItems = [
     {
-      question: '¿Qué es Inventra?',
-      answer: 'Inventra es una herramienta impulsada por inteligencia artificial que te ayuda a crear publicaciones optimizadas para e-commerce en segundos, ahorrándote horas de trabajo.',
+      question: t('faq.q1'),
+      answer: t('faq.a1'),
     },
     {
-      question: '¿Para quién es Inventra?',
-      answer: 'Inventra está diseñado para vendedores de e-commerce que necesitan crear publicaciones rápidas, claras y optimizadas para plataformas como Mercado Libre y Facebook Marketplace.',
+      question: t('faq.q2'),
+      answer: t('faq.a2'),
     },
     {
-      question: '¿Cómo funciona?',
-      answer: 'Solo ingresas la información básica de tu producto y nuestra IA genera automáticamente una publicación optimizada según la plataforma donde quieras vender.',
+      question: t('faq.q3'),
+      answer: t('faq.a3'),
     },
     {
-      question: '¿Puedo usarlo aunque no tenga e-commerce?',
-      answer: 'Sí, Inventra funciona para cualquier persona que necesite crear publicaciones para vender productos en plataformas online.',
+      question: t('faq.q4'),
+      answer: t('faq.a4'),
     },
     {
-      question: '¿Qué nos diferencia de la competencia?',
-      answer: 'Inventra está diseñado para crear publicaciones de e-commerce con formatos optimizados, estructuras de venta probadas y datos actualizados de las plataformas.',
+      question: t('faq.q5'),
+      answer: t('faq.a5'),
     },
     {
-      question: '¿Qué tipos de planes tiene Inventra?',
-      answer: 'Ofrecemos un plan gratuito para empezar y un plan Pro con publicaciones ilimitadas y soporte prioritario.',
+      question: t('faq.q6'),
+      answer: t('faq.a6'),
     },
     {
-      question: '¿Funciona a nivel global?',
-      answer: 'Sí, Inventra funciona globalmente para cualquier vendedor de e-commerce en cualquier país.',
+      question: t('faq.q7'),
+      answer: t('faq.a7'),
     },
   ];
 
@@ -182,16 +183,16 @@ export default function Home() {
 
 
             <div className="relative">
-              <h1 className="text-center text-5xl md:text-6xl lg:text-7xl font-semibold mb-6 leading-[1.15] tracking-tight 
+              <h1 className="text-center text-5xl md:text-6xl lg:text-7xl font-semibold mb-6 leading-[1.15] tracking-tight
 bg-gradient-to-b from-white via-white to-gray-400
 bg-clip-text text-transparent pb-2 mt-10">
-                Crea publicaciones en segundos, no horas con IA
+                {t('hero.title')}
               </h1>
 
 
 
               <p className="text-center text-base md:text-lg text-gray-400 max-w-2xl mx-auto mb-8 md:mb-10">
-                Crea publicaciones optimizadas para e-commerce con IA en segundos.
+                {t('hero.subtitle')}
 
               </p>
 
@@ -207,7 +208,7 @@ bg-clip-text text-transparent pb-2 mt-10">
                   ))}
                 </div>
                 <p className="text-white font-semibold text-lg md:text-1xl tracking-tight ml-2">
-                  Únete a <span className="text-white">+100 usuarios</span>
+                  {t('hero.joinUsers')} <span className="text-white">{t('hero.usersCount')}</span>
                 </p>
               </div>
 
@@ -344,13 +345,13 @@ bg-clip-text text-transparent pb-2 mt-10">
           {/* Header with Title and Button */}
           <div className="flex flex-col md:flex-row items-start items-start md:items-center justify-between gap-6 mb-16 px-4">
             <div className="max-w-2xl text-left">
-              <h2 className="text-4xl md:text-5xl  mb-6 tracking-tight ont-semibold mb-6 leading-[1.15] tracking-tight 
+              <h2 className="text-4xl md:text-5xl  mb-6 tracking-tight ont-semibold mb-6 leading-[1.15] tracking-tight
 bg-gradient-to-b from-white via-white to-gray-400
 bg-clip-text text-transparent font-semibold" >
-                Crea publicaciones con IA
+                {t('premiumFeatures.title')}
               </h2>
               <p className="text-gray-400 text-lg">
-                Optimiza y crea publicaciones para e-commerce con IA
+                {t('premiumFeatures.subtitle')}
               </p>
             </div>
             <div className="flex items-center">
@@ -598,11 +599,11 @@ bg-clip-text text-transparent font-semibold" >
           <div className="mb-16">
 <p className="text-gray-400 font-medium text-lg text-sm">LAS 4 FUNCIONES PRINCIPALES</p>
             <h2 className="mt-5 text-3xl font-medium  mb-4 font-semibold lg:text-[30px] leading-[1.15] tracking-tight bg-gradient-to-b from-white via-white to-gray-400 bg-clip-text text-transparent">
-              Todo lo que necesitas para optimizar tus publicaciones
+              {t('features.sectionTitle')}
             </h2>
 
             <p className="text-gray-400">
-              Herramientas potentes para optimizar tus publicaciones de forma eficiente.
+              {t('features.sectionSubtitle')}
             </p>
 
           </div>
@@ -648,11 +649,11 @@ bg-clip-text text-transparent font-semibold" >
           <div className="mb-16 text-center">
 
             <h2 className="text-3xl font-medium text-white mb-4">
-              Planes simples y transparentes
+              {t('pricing.sectionTitle')}
             </h2>
 
             <p className="text-gray-400">
-              Comienza gratis y actualiza cuando tu negocio crezca.
+              {t('pricing.sectionSubtitle')}
             </p>
 
           </div>
@@ -768,8 +769,8 @@ bg-clip-text text-transparent font-semibold" >
               <span className="text-gray-400 font-bold text-lg">1</span>
             </div>
             <div>
-              <h3 className="text-white font-semibold mb-2">Ingresa los datos del producto</h3>
-              <p className="text-gray-400 text-sm">Proporciona información básica como nombre, descripción y características del artículo</p>
+              <h3 className="text-white font-semibold mb-2">{currentLocale === 'es' ? 'Ingresa los datos del producto' : 'Enter your product data'}</h3>
+              <p className="text-gray-400 text-sm">{currentLocale === 'es' ? 'Proporciona información básica como nombre, descripción y características del artículo' : 'Provide basic information such as name, description and product features'}</p>
             </div>
           </div>
           <div className="flex items-start gap-4">
@@ -777,8 +778,8 @@ bg-clip-text text-transparent font-semibold" >
               <span className="text-gray-400 font-bold text-lg">2</span>
             </div>
             <div>
-              <h3 className="text-white font-semibold mb-2">La IA optimiza automáticamente</h3>
-              <p className="text-gray-400 text-sm">Nuestro modelo genera títulos atractivos y descripciones convincentes para vender más rápido</p>
+              <h3 className="text-white font-semibold mb-2">{currentLocale === 'es' ? 'La IA optimiza automáticamente' : 'AI optimizes automatically'}</h3>
+              <p className="text-gray-400 text-sm">{currentLocale === 'es' ? 'Nuestro modelo genera títulos atractivos y descripciones convincentes para vender más rápido' : 'Our model generates attractive titles and convincing descriptions to sell faster'}</p>
             </div>
           </div>
           <div className="flex items-start gap-4">
@@ -786,8 +787,8 @@ bg-clip-text text-transparent font-semibold" >
               <span className="text-gray-400 font-bold text-lg">3</span>
             </div>
             <div>
-              <h3 className="text-white font-semibold mb-2">Publica en tu plataforma</h3>
-              <p className="text-gray-400 text-sm">Copia la publicación optimizada y publícala en Mercado Libre, Facebook o tu tienda en línea</p>
+              <h3 className="text-white font-semibold mb-2">{currentLocale === 'es' ? 'Publica en tu plataforma' : 'Publish on your platform'}</h3>
+              <p className="text-gray-400 text-sm">{currentLocale === 'es' ? 'Copia la publicación optimizada y publícala en Mercado Libre, Facebook o tu tienda en línea' : 'Copy the optimized listing and publish it on Mercado Libre, Facebook or your online store'}</p>
             </div>
           </div>
         </div>
@@ -887,13 +888,13 @@ bg-clip-text text-transparent font-semibold" >
         viewport={{ once: true, amount: 0.3 }}
       >
         <div className="max-w-4xl mx-auto">
-          <h1 className="text-[20px] text-gray-400 line-clamp-2">PREGUNTAS FREQUENTES</h1>
+          <h1 className="text-[20px] text-gray-400 line-clamp-2">{t('faq.title')}</h1>
           <h2 className="text-3xl font-semibold text-white mb-6">
-            <span className="block max-w-[600px] text-white/25 lg:text-[50px] font-semibold mb-6 leading-[1.15] tracking-tight 
-bg-gradient-to-b from-white via-white to-gray-400 
-bg-clip-text text-transparent pb-2">Preguntas y respuestas reales de nuestros usuarios </span>
+            <span className="block max-w-[600px] text-white/25 lg:text-[50px] font-semibold mb-6 leading-[1.15] tracking-tight
+bg-gradient-to-b from-white via-white to-gray-400
+bg-clip-text text-transparent pb-2">{t('faq.subtitle')} </span>
           </h2>
-          <p className="text-gray-400 mb-12">Preguntas, reclamos, inquietudes gestionadas por nuestros usuarios</p>
+          <p className="text-gray-400 mb-12">{t('faq.subtitle')}</p>
 
           <div className="border-t border-white/10">
             {faqItems.map((item, index) => (
