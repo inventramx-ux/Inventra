@@ -159,16 +159,7 @@ export default function CookieConsent() {
             >
               ¡Entendido!
             </button>
-            <div className="mt-3 flex items-center justify-center">
-              <a
-                href="https://www.instagram.com/inventramx/"
-                className="inline-flex items-center gap-2 text-zinc-300 hover:text-white transition-colors text-sm"
-                aria-label="Ver Instagram"
-              >
-                <Instagram className="w-4 h-4" />
-                <span>ver instagran</span>
-              </a>
-            </div>
+           
           </div>
         </div>
       )}
