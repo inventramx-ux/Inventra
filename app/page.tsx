@@ -950,7 +950,6 @@ bg-clip-text text-transparent pb-2">{t('faq.subtitle')} </span>
                 {t('footer.tagline')}
               </p>
             </div>
-/* Social Links */
             <div className="flex items-center gap-2">
               <a
                 href="https://vercel.com"
