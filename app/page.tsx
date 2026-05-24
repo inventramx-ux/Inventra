@@ -909,29 +909,14 @@ bg-clip-text text-transparent pb-2">{t('faq.subtitle')} </span>
       {/* Inlined Footer (previously in app/components/Footer.tsx) */}
 <div className="border border-white/10 rounded-lg bg-white/5 px-6 py-4 ml-4 mr-4 mb-8">
   {/* your content here */}
-      <footer className="border- border-white/10 py-12">
+      <footer className="border- border-white/10 py-8">
       <div className="aura lights">
        
   
-        <div className="h-90 w-full border-1 border-white/10 bg-black/40 rounded-[20px] text-center justify-center items-center flex flex-col gap-4 p-10">
-          <h1 className="font-semibold text-[25px]  leading-[1.15] tracking-tight
-bg-gradient-to-b from-white via-white to-gray-400
-bg-clip-text text-transparent">Inventra</h1>
-          <h2 className="font-semibold text-[50px]  leading-[1.15] tracking-tight
-bg-gradient-to-b from-white via-white to-gray-400
-bg-clip-text text-transparent">
-            {currentLocale === 'es' ? 'Crea Publicaciones con IA 🤖' : 'Create Listings with AI 🤖'}
-          </h2>
-          <h3 className=" leading-[1.15] tracking-tight
-bg-gradient-to-b from-white via-white to-gray-400
-bg-clip-text text-transparent">
-            {currentLocale === 'es' ? 'El mejor AI para publicaciones de e-commerce en el mundo' : 'The best AI for e-commerce listings worldwide'}
-          </h3>
-
-        </div>
+      
       </div>
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-20 border-b border-white/10 pb-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 border-b border-white/10 pb-8">
 
           <div className="flex flex-col md:flex-row justify-between items-center gap-6">
 
@@ -955,8 +940,15 @@ bg-clip-text text-transparent">
 
                 &copy; {new Date().getFullYear()} Inventra.
 
+              </p >
+<p className="text-gray-500 text-sm flex items-center gap-2">
+                <svg className="w-5 h-5 flex-shrink-0" viewBox="0 0 900 600" xmlns="http://www.w3.org/2000/svg">
+                  <rect width="300" height="600" fill="#078930"/>
+                  <rect x="300" width="300" height="600" fill="white"/>
+                  <rect x="600" width="300" height="600" fill="#CE3126"/>
+                </svg>
+                {t('footer.tagline')}
               </p>
-
             </div>
 
             <div className="flex items-center gap-2">
