@@ -155,6 +155,342 @@
     "copyEmail": "Copy email",
     "general": "General"
   },
+  "guide": {
+    "title": "Inventra Usage Manual",
+    "subtitle": "Complete guide to create listings that sell. Follow these steps to get the best results.",
+    "quickTips": {
+      "tip0": {
+        "title": "Good Photo",
+        "subtitle": "= 50% of sales success"
+      },
+      "tip1": {
+        "title": "Accurate Data",
+        "subtitle": "= Fewer returns"
+      },
+      "tip2": {
+        "title": "Right Price",
+        "subtitle": "= Fast sale"
+      }
+    },
+    "sections": {
+      "section0": {
+        "title": "High-Quality Image Capture",
+        "description": "Image is the most important thing. A good photo attracts more buyers.",
+        "step0": {
+          "title": "Perfect Lighting",
+          "description": "Use natural or clear lighting so the product looks good.",
+          "tips": {
+            "0": "Take photos during the day by a window",
+            "1": "Avoid shadows and excessive backlighting",
+            "2": "If it's night, use white/LED lights",
+            "3": "Avoid yellowish light that distorts colors"
+          }
+        },
+        "step1": {
+          "title": "Clean Background",
+          "description": "A simple background makes the product stand out.",
+          "tips": {
+            "0": "Use white, gray, or neutral background",
+            "1": "You can use our background remover in 'Image Optimization'",
+            "2": "Avoid cluttered backgrounds or competing colors",
+            "3": "The product should be the star"
+          }
+        },
+        "step2": {
+          "title": "Strategic Angles",
+          "description": "Show the product from its best angles.",
+          "tips": {
+            "0": "Photograph from the front for the first image",
+            "1": "Include important details (logo, condition, etc.)",
+            "2": "For clothing: hang the garment",
+            "3": "For electronics: show screen, buttons, connectors"
+          }
+        },
+        "step3": {
+          "title": "High Resolution",
+          "description": "Clear and sharp images generate more trust.",
+          "tips": {
+            "0": "Minimum 800x800 pixels",
+            "1": "Use our upscaler if your photos are small",
+            "2": "Avoid blurry or pixelated images",
+            "3": "Format: JPG, PNG, or WEBP"
+          }
+        },
+        "examples": {
+          "good": "Clear photo with natural lighting, white background, sharp and well-focused product",
+          "bad": "Blurry photo, cluttered background, poor lighting, small product in image"
+        }
+      },
+      "section1": {
+        "title": "Accurate Product Data",
+        "description": "Correct information increases buyer visibility and trust.",
+        "step0": {
+          "title": "Brand and Model",
+          "description": "Be specific with the exact brand and model.",
+          "tips": {
+            "0": "Write the official brand (not 'Samung' but 'Samsung')",
+            "1": "Include the exact model (e.g., iPhone 15 Pro Max)",
+            "2": "Add manufacturing year if applicable",
+            "3": "Avoid confusing abbreviations"
+          }
+        },
+        "step1": {
+          "title": "Product Condition",
+          "description": "Indicate if it's new, used, refurbished, etc.",
+          "tips": {
+            "0": "'New' = never used, original packaging",
+            "1": "'Used/Like new' = no visible defects",
+            "2": "'Used/Good' = works perfectly, minimal wear",
+            "3": "Be honest: increases sales and reduces returns"
+          }
+        },
+        "step2": {
+          "title": "Correct Category",
+          "description": "Classify your product in the appropriate category.",
+          "tips": {
+            "0": "Choose the most specific category possible",
+            "1": "Don't force product into wrong category",
+            "2": "Example: Audi A4 in 'Cars > Sedans' not 'Accessories'",
+            "3": "Better category = better visibility"
+          }
+        },
+        "step3": {
+          "title": "Real Stock",
+          "description": "Indicate available quantity correctly.",
+          "tips": {
+            "0": "Update stock after each sale",
+            "1": "Stock 0 = doesn't appear in searches",
+            "2": "High stock = more trust if legitimate",
+            "3": "Avoid lying about availability"
+          }
+        }
+      },
+      "section2": {
+        "title": "Winning Description",
+        "description": "A clear and convincing description sells faster.",
+        "step0": {
+          "title": "Effective Structure",
+          "description": "Organize information clearly.",
+          "tips": {
+            "0": "Paragraph 1: What is it? (Clear identification)",
+            "1": "Paragraph 2: Why is it good? (Benefits)",
+            "2": "Paragraph 3: What's the condition? (Condition)",
+            "3": "Use bullet points for main features"
+          }
+        },
+        "step1": {
+          "title": "Keywords (SEO)",
+          "description": "Use terms that buyers search for.",
+          "tips": {
+            "0": "Include brand, model, and features",
+            "1": "Think: how would a buyer search for this?",
+            "2": "Example: Not 'car' but 'Audi A4 2018 sedan gasoline'",
+            "3": "Repeat keywords 2-3 times without sounding like spam"
+          }
+        },
+        "step2": {
+          "title": "Highlight Benefits",
+          "description": "Explain the value, not just features.",
+          "tips": {
+            "0": "Not just '4K Screen' but '4K Screen for HD movies without ads'",
+            "1": "Benefit = how it improves the buyer's life",
+            "2": "Highlight with **bold** important things",
+            "3": "Turn features into advantages"
+          }
+        },
+        "step3": {
+          "title": "Total Honesty",
+          "description": "Mention any defects or limitations.",
+          "tips": {
+            "0": "Small scratch? Mention it",
+            "1": "Battery at 90%? Say it",
+            "2": "No original case? Specify",
+            "3": "Honesty = fewer returns and better reputation"
+          }
+        },
+        "examples": {
+          "good": "iPhone 15 Pro Max 256GB. New unopened. Apple 1-year warranty. Professional camera, A17 processor. Perfect for photography.",
+          "bad": "iphone very good cheap price only owner"
+        }
+      },
+      "section3": {
+        "title": "Realistic and Competitive Price",
+        "description": "The right price generates fast sales.",
+        "step0": {
+          "title": "Research the Market",
+          "description": "Check prices of similar products.",
+          "tips": {
+            "0": "Search for the same product on the platform",
+            "1": "Note prices of 5-10 similar products",
+            "2": "Consider: condition, includes accessories, warranty",
+            "3": "Price = average - 5-10% to sell fast"
+          }
+        },
+        "step1": {
+          "title": "Use AI to Estimate",
+          "description": "Our AI analyzes images to suggest price.",
+          "tips": {
+            "0": "Upload a clear photo of your product",
+            "1": "AI will consider: brand, model, condition",
+            "2": "Compare suggestion with your research",
+            "3": "Adjust based on local demand"
+          }
+        },
+        "step2": {
+          "title": "Strategic Adjustments",
+          "description": "Modify price based on situation.",
+          "tips": {
+            "0": "Include accessories = raise price 5-15%",
+            "1": "Extra warranty = raise price 10-20%",
+            "2": "Free shipping = raise 3-5% over base price",
+            "3": "New in box = raise 20-30% vs used"
+          }
+        },
+        "step3": {
+          "title": "Promotions",
+          "description": "Attract buyers with offers.",
+          "tips": {
+            "0": "High initial price, then discount = generates FOMO",
+            "1": "Discount for multiple purchases",
+            "2": "'Flexible price' if you accept negotiation",
+            "3": "3-5% discount = sells 30% faster"
+          }
+        }
+      },
+      "section4": {
+        "title": "AI Optimization (Final Step)",
+        "description": "Let AI perfect your listing.",
+        "step0": {
+          "title": "Complete All Data",
+          "description": "More information = better results.",
+          "tips": {
+            "0": "Fill in brand, model, condition, category",
+            "1": "Add base description (even if short)",
+            "2": "Indicate if there's free shipping",
+            "3": "Specify if there's a warranty"
+          }
+        },
+        "step1": {
+          "title": "Upload Clear Image",
+          "description": "AI analyzes the image to estimate price.",
+          "tips": {
+            "0": "Front image, well-lit",
+            "1": "Product visible and sharp",
+            "2": "No people or hands (just the product)",
+            "3": "Simple background for better analysis"
+          }
+        },
+        "step2": {
+          "title": "Press Optimize",
+          "description": "Let the AI do the magic.",
+          "tips": {
+            "0": "AI will generate: title, description, price, hashtags",
+            "1": "Takes 10-30 seconds",
+            "2": "You can edit results if needed",
+            "3": "Use the suggestion as a base to improve"
+          }
+        },
+        "step3": {
+          "title": "Review and Publish",
+          "description": "Verify before publishing to your platform.",
+          "tips": {
+            "0": "Read the title: is it attractive? Has key info?",
+            "1": "Review description: would you buy this?",
+            "2": "Verify price: is it competitive?",
+            "3": "Copy and publish to your platform"
+          }
+        }
+      },
+      "section5": {
+        "title": "Recommended Platforms",
+        "description": "Where to publish for maximum reach.",
+        "step0": {
+          "title": "Mercado Libre",
+          "description": "The #1 platform in Latin America.",
+          "tips": {
+            "0": "Largest buyer audience",
+            "1": "Best for sales volume",
+            "2": "Use our optimized keywords",
+            "3": "Main photo is critical"
+          }
+        },
+        "step1": {
+          "title": "Facebook Marketplace",
+          "description": "Local buyer, quick transaction.",
+          "tips": {
+            "0": "Local audience in your area",
+            "1": "Faster sales (24-48h)",
+            "2": "Less competition for specific products",
+            "3": "Ideal for large/local items"
+          }
+        },
+        "step2": {
+          "title": "Etsy",
+          "description": "For handmade, vintage, and crafts.",
+          "tips": {
+            "0": "Global audience with budget",
+            "1": "Better for unique products",
+            "2": "They seek quality, not low price",
+            "3": "International shipping"
+          }
+        },
+        "step3": {
+          "title": "Amazon / Shopify",
+          "description": "For sellers with inventory.",
+          "tips": {
+            "0": "Better if you have multiple units",
+            "1": "Requires larger initial investment",
+            "2": "Massive audience but more competition",
+            "3": "Better for established brands"
+          }
+        }
+      }
+    },
+    "proTips": {
+      "title": "Pro Tips to Beat the Competition",
+      "tip0": {
+        "title": "📸 Professional Photography",
+        "tips": {
+          "0": "Minimum 3 photos from different angles",
+          "1": "One photo showing important detail",
+          "2": "One photo showing packaging/accessories"
+        }
+      },
+      "tip1": {
+        "title": "🎯 SEO Positioning",
+        "tips": {
+          "0": "Keyword in title (first 50 characters)",
+          "1": "Repeat key 2-3 times in description",
+          "2": "Add variants: brand + model + year"
+        }
+      },
+      "tip2": {
+        "title": "⭐ Instant Credibility",
+        "tips": {
+          "0": "Free shipping (increases 40% sale probability)",
+          "1": "Warranty or risk-free returns",
+          "2": "Respond quickly to messages"
+        }
+      },
+      "tip3": {
+        "title": "💰 Price Strategy",
+        "tips": {
+          "0": "5% below competition = sells 3x faster",
+          "1": "End in .999 (price psychology)",
+          "2": "Update price every 3 days if unsold"
+        }
+      }
+    },
+    "examples": {
+      "wellDone": "Well Done ✓",
+      "avoid": "Avoid ✗"
+    },
+    "cta": {
+      "title": "Ready to Create Your First Listing?",
+      "subtitle": "Follow this guide and use our AI to automatically optimize your listings.",
+      "button": "Go to Dashboard"
+    }
+  },
   "dashboard": {
     "welcome": "Welcome, {name}",
     "activitySummary": "Here's a summary of your optimization activity.",

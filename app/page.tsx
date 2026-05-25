@@ -387,7 +387,7 @@ bg-clip-text text-transparent font-semibold" >
               <div className="relative bg-[#0a0a0a] rounded-2xl border border-white/5 overflow-hidden p-5 aspect-square font-sans flex flex-col">
                 <div className="flex flex-col flex-1 gap-4">
                   {/* Header */}
-                  <h4 className="text-[10px] font-bold text-zinc-500 uppercase tracking-[0.2em]">VISTA PREVIA OPTIMIZADA</h4>
+                  <h4 className="text-[10px] font-bold text-zinc-500 uppercase tracking-[0.2em]">{t('premiumFeatures.card1PreviewLabel')}</h4>
 
                   {/* Image Container */}
                   <div className="relative aspect-[16/10] w-full rounded-xl overflow-hidden border border-white/10 bg-zinc-900 flex items-center justify-center">
@@ -396,15 +396,15 @@ bg-clip-text text-transparent font-semibold" >
 
                   {/* Title Block */}
                   <div className="space-y-2">
-                    <h5 className="text-[10px] font-bold text-zinc-500 uppercase tracking-wider">TÍTULO OPTIMIZADO</h5>
+                    <h5 className="text-[10px] font-bold text-zinc-500 uppercase tracking-wider">{t('premiumFeatures.card1OptimizedTitle')}</h5>
                     <h3 className="text-sm font-bold text-white leading-snug">
-                      Producto Premium — Cámara de Alta Resolución y Procesador de Próxima Generación
+                      {t('premiumFeatures.card1SuggestedPrice')}
                     </h3>
                   </div>
 
                   {/* Price Block */}
                   <div className="p-4 rounded-xl bg-white/[0.03] border border-white/10 space-y-2 mt-auto">
-                    <h5 className="text-[10px] font-bold text-zinc-500 uppercase tracking-wider">PRECIO SUGERIDO POR IA</h5>
+                    <h5 className="text-[10px] font-bold text-zinc-500 uppercase tracking-wider">AI SUGGESTED PRICE</h5>
                     <span className="text-2xl font-bold text-white tracking-tight">$12,999 USD</span>
                   </div>
                 </div>
@@ -414,10 +414,10 @@ bg-clip-text text-transparent font-semibold" >
                                 <p className="text-gray-400 font-bold text-lg text-sm">INVENTRA</p>
 
                 <div className="flex items-center gap-3">
-                  <h3 className="font-semibold lg:text-[30px] leading-[1.15] tracking-tight bg-gradient-to-b from-white via-white to-gray-400 bg-clip-text text-transparent">Optimización de publicaciones</h3>
+                  <h3 className="font-semibold lg:text-[30px] leading-[1.15] tracking-tight bg-gradient-to-b from-white via-white to-gray-400 bg-clip-text text-transparent">{t('premiumFeatures.card1Title')}</h3>
                 </div>
                 <p className="text-gray-400 text-sm leading-relaxed mt-2">
-                  Optimiza el título y descripción de tus publicaciones con IA y mejora el posicionamiento de tus productos.
+                  {t('premiumFeatures.card1Description')}
                 </p>
               </div>
             </div>
@@ -448,11 +448,11 @@ bg-clip-text text-transparent font-semibold" >
                 <div className="p-4 rounded-2xl border border-white/10 bg-white/[0.03] space-y-4 flex-1 flex flex-col">
                   <div className="flex justify-between items-start">
                     <div className="space-y-1">
-                      <h5 className="text-sm font-bold text-white">Fondo</h5>
-                      <p className="text-[10px] text-zinc-500 font-medium">Elimina el fondo y elige un color sólido.</p>
+                      <h5 className="text-sm font-bold text-white">{t('premiumFeatures.card2BgLabel')}</h5>
+                      <p className="text-[10px] text-zinc-500 font-medium">{t('premiumFeatures.card2BgDesc')}</p>
                     </div>
                     <div className="px-3 py-1.5 bg-white/10 border border-white/10 rounded-md text-[10px] text-zinc-300 font-bold shrink-0">
-                      Seleccionar
+                      {t('premiumFeatures.card2Select')}
                     </div>
                   </div>
 
@@ -471,7 +471,7 @@ bg-clip-text text-transparent font-semibold" >
 
                   {/* Color options */}
                   <div className="space-y-2 mt-auto">
-                    <h6 className="text-[9px] text-zinc-600 uppercase font-black tracking-widest">FONDO RESULTANTE</h6>
+                    <h6 className="text-[9px] text-zinc-600 uppercase font-black tracking-widest">{t('premiumFeatures.card2ResultBg')}</h6>
                     <div className="flex gap-2">
                       <div className="h-7 w-7 rounded-lg bg-white border-2 border-white shadow-sm" />
                       <div className="h-7 w-7 rounded-lg bg-black border border-white/10" />
@@ -487,10 +487,10 @@ bg-clip-text text-transparent font-semibold" >
               <div className="pt-6">
                   <p className="text-gray-400 font-bold text-lg text-sm">INVENTRA</p>
                 <div className="flex items-center gap-3">
-                  <h3 className="font-semibold lg:text-[30px] leading-[1.15] tracking-tight bg-gradient-to-b from-white via-white to-gray-400 bg-clip-text text-transparent">Optimización de Imágenes.</h3>
+                  <h3 className="font-semibold lg:text-[30px] leading-[1.15] tracking-tight bg-gradient-to-b from-white via-white to-gray-400 bg-clip-text text-transparent">{t('premiumFeatures.card2Title')}</h3>
                 </div>
                 <p className="text-gray-400 text-sm leading-relaxed mt-2">
-                  Transforma tus fotos en imágenes de estudio. Elimina fondos, aumenta resolución y mejora colores con IA quirúrgica.
+                  {t('premiumFeatures.card2Description')}
                 </p>
               </div>
             </div>
@@ -504,15 +504,15 @@ bg-clip-text text-transparent font-semibold" >
                 {/* Stats Row */}
                 <div className="grid grid-cols-3 gap-2 mb-4">
                   <div className="bg-white/[0.03] border border-white/5 rounded-xl p-3">
-                    <p className="text-[8px] text-zinc-500 font-bold mb-1 uppercase tracking-wider">Publicaciones</p>
+                    <p className="text-[8px] text-zinc-500 font-bold mb-1 uppercase tracking-wider">{t('premiumFeatures.card3Publications')}</p>
                     <p className="text-xl font-bold text-white">24</p>
                   </div>
                   <div className="bg-white/[0.03] border border-white/5 rounded-xl p-3">
-                    <p className="text-[8px] text-zinc-500 font-bold mb-1 uppercase tracking-wider">Con IA</p>
+                    <p className="text-[8px] text-zinc-500 font-bold mb-1 uppercase tracking-wider">{t('premiumFeatures.card3WithAI')}</p>
                     <p className="text-xl font-bold text-white">18</p>
                   </div>
                   <div className="bg-white/[0.03] border border-white/5 rounded-xl p-3">
-                    <p className="text-[8px] text-zinc-500 font-bold mb-1 uppercase tracking-wider">Éxito</p>
+                    <p className="text-[8px] text-zinc-500 font-bold mb-1 uppercase tracking-wider">{t('premiumFeatures.card3Success')}</p>
                     <p className="text-xl font-bold text-white">94%</p>
                   </div>
                 </div>
@@ -567,10 +567,10 @@ bg-clip-text text-transparent font-semibold" >
                                 <p className="text-gray-400 font-bold text-lg text-sm">INVENTRA</p>
 
                 <div className="flex items-center gap-3">
-                  <h3 className="font-semibold lg:text-[30px] leading-[1.15] tracking-tight bg-gradient-to-b from-white via-white to-gray-400 bg-clip-text text-transparent">Métricas avanzadas.</h3>
+                  <h3 className="font-semibold lg:text-[30px] leading-[1.15] tracking-tight bg-gradient-to-b from-white via-white to-gray-400 bg-clip-text text-transparent">{t('premiumFeatures.card3Title')}</h3>
                 </div>
                 <p className="text-gray-400 text-sm leading-relaxed mt-2">
-                  Obtén métricas sobre tus publicaciones y mejora el posicionamiento de tus productos.
+                  {t('premiumFeatures.card3Description')}
                 </p>
               </div>
             </div>
@@ -1208,6 +1208,7 @@ function DashboardPreview() {
 function InlineNavbar() {
   const { isLoaded } = useAuth();
   const { proPrice } = useCurrency();
+  const t = useTranslations('landing');
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
 
@@ -1220,7 +1221,7 @@ function InlineNavbar() {
       >
         <p className="text-sm font-medium flex items-center gap-2 ">
           <img src="/lpmini.png" alt="Logo" className="w-6 h-auto" />
-          <span>Aprovecha Inventra al máximo y adquiere <span className="text-white font-bold">Inventra Pro</span> por solo {proPrice}</span>
+          <span>{t('nav.proBanner')} <span className="text-white font-bold">{t('nav.proBannerBold')}</span> {t('nav.proBannerSuffix')} {proPrice}</span>
           <ArrowRight className="w-4 h-4 " />
         </p>
       </Link></div>
