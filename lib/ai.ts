@@ -47,41 +47,58 @@ export async function optimizePublication(
     lengthInstruction = "IMPORTANTE: La descripción debe tener una longitud MEDIA (2 o 3 párrafos), concisa pero informativa sobre los beneficios clave.";
   }
 
-  const prompt = `
-    Actúa como un experto en marketing de e-commerce y optimización de marketplaces.
-    
-    Tu tarea es generar contenido optimizado para la plataforma: "${platform}".
-    
-    DATOS DEL PRODUCTO (Solo usa los campos que tienen un valor asignado):
-    - Nombre: "${name}"
-    - Descripción base: "${getVal('description', data.description)}"
-    - Precio: "${getVal('price', data.price)}"
-    - Tags SEO: "${getVal('tags', data.tags)}"
-    - Meses Sin Intereses (MSI): "${getVal('msi', data.msi ? 'Disponible' : 'No disponible')}"
-    - Envío: "${getVal('shipping', data.shipping === 'free' ? 'Gratis' : 'A cargo del comprador')}"
-    - Garantía: "${getVal('warranty', data.warranty)}"
-    - Condición: "${getVal('condition', data.condition)}"
-    - Marca: "${getVal('brand', data.brand)}"
-    - Modelo: "${getVal('model', data.model)}"
-    - Categoría: "${getVal('category', data.category)}"
-    - Stock: "${getVal('stock', data.stock)}"
+  // Build the prompt - include image reference if available
+  let imageContext = '';
+  if (data.imageUrl && typeof data.imageUrl === 'string') {
+    // Include image reference in the prompt
+    imageContext = '\n\nIMAGE PROVIDED: An image of the product has been provided. Analyze it carefully for condition, features, and visible details.';
+  }
 
-    INSTRUCCIONES CRÍTICAS:
-    0. IDIOMA DE SALIDA: Toda la respuesta (título, descripción, precio sugerido, etc.) DEBE estar estrictamente en el idioma: ${locale === 'es' ? 'Español' : 'Inglés'}.
-    1. Si un campo dice "No incluir", NO menciones ese dato en la optimización.
-    2. Usa los "Tags SEO" para incorporar esas palabras clave de forma natural en la descripción y el título.
-    3. Título: Maximizar clics y SEO específico para ${platform}.
-    4. Descripción: ${lengthInstruction} Evita introducciones largas o texto excesivo de relleno. Usa bullet points de beneficios, destacando MSI o Envío Gratis si están habilitados.
-       IMPORTANTE: Usa formato Markdown en la descripción. Usa **negritas** para resaltar palabras clave. Usa guiones (-) para las listas de viñetas. NO uses otro tipo de formato. La descripción DEBE ser muy clara y fácil de leer.
-    5. PRECIO SUGERIDO: Investiga mentalmente o estima el valor de mercado actual de este producto (Marca, Modelo, Condición) en plataformas de venta en línea. Devuelve un valor numérico realista (sin símbolos de moneda) como "suggestedPrice". Si no tienes suficiente información, estima un valor competitivo.
-    6. Responde ÚNICAMENTE con un objeto JSON (sin bloques de código markdown, solo el texto del JSON). Todos los valores de texto deben estar en ${locale === 'es' ? 'Español' : 'Inglés'}:
-    {
-      "title": "título optimizado",
-      "description": "descripción optimizada con formato markdown",
-      "suggestedPrice": "valor numérico (ej: 1500.00)",
-      "hashtags": ["tag1", "tag2", "tag3", "tag4", "tag5"]${isPro ? ',\n      "optimizationState": "Estado de la optimización (ej. Excelente, Analizado)"' : ''}
-    }
-  `;
+  const textPrompt = `
+You are an expert vehicle and product appraiser with deep knowledge of current market prices and e-commerce optimization.
+
+Analyze the provided information carefully and identify exactly what you see — the specific make, model, year, trim level, condition, and any visible modifications or features.${imageContext}
+
+YOUR TASKS:
+1. PRICE ESTIMATION: Based on the product details and any visible information, provide a realistic current market price in USD.
+   - Identify the specific item (not a generic guess)
+   - Consider current US market conditions
+   - Account for visible condition from the product information
+   - Factor in any special features, trim levels, or modifications mentioned
+   - Return ONLY the numeric price (no symbols, no commas, no text) for the "suggestedPrice" field
+   - Examples: "225000" for a 2019 Ferrari 488 GTB in good condition; "12000" for a 2015 Honda Civic in average condition
+   - Be accurate. Do not return placeholder values like 10 or 100
+   - Do not return absurdly high values like 10000000 unless the item genuinely warrants it
+
+2. MARKETING CONTENT: Generate optimized content for the platform: "${platform}"
+
+PRODUCT DATA:
+- Name: "${name}"
+- Description: "${getVal('description', data.description)}"
+- Tags SEO: "${getVal('tags', data.tags)}"
+- Condition: "${getVal('condition', data.condition)}"
+- Brand: "${getVal('brand', data.brand)}"
+- Model: "${getVal('model', data.model)}"
+- Category: "${getVal('category', data.category)}"
+- Free Shipping: "${getVal('shipping', data.shipping === 'free' ? 'Yes' : 'No')}"
+- Warranty: "${getVal('warranty', data.warranty)}"
+- Stock: "${getVal('stock', data.stock)}"
+
+CRITICAL INSTRUCTIONS:
+0. OUTPUT LANGUAGE: All response text (title, description, etc.) MUST be strictly in ${locale === 'es' ? 'Spanish' : 'English'}.
+1. If a field says "No incluir", DO NOT mention that data in the optimization.
+2. Use the "Tags SEO" to incorporate those keywords naturally in the description and title.
+3. Title: Maximize clicks and SEO specific to ${platform}.
+4. Description: ${lengthInstruction} Avoid long introductions or excessive filler text. Use bullet points for benefits.
+   IMPORTANT: Use Markdown format in the description. Use **bold** to highlight keywords. Use hyphens (-) for bullet lists. NO other format types. Description MUST be very clear and easy to read.
+5. Return ONLY a JSON object (no markdown code blocks, just the JSON text):
+{
+  "title": "optimized title",
+  "description": "optimized description with markdown format",
+  "suggestedPrice": "numeric value only (ej: 225000)",
+  "hashtags": ["tag1", "tag2", "tag3", "tag4", "tag5"]${isPro ? ',\n  "optimizationState": "Optimization state (ej. Excellent, Analyzed)"' : ''}
+}
+`;
 
   let lastError = null;
 
@@ -89,7 +106,7 @@ export async function optimizePublication(
     try {
       console.log(`Intentando optimización con modelo Groq: ${modelName}`);
       const chatCompletion = await groq.chat.completions.create({
-        messages: [{ role: "user", content: prompt }],
+        messages: [{ role: "user", content: textPrompt }],
         model: modelName,
         response_format: { type: "json_object" },
       });

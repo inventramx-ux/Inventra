@@ -34,7 +34,6 @@ import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { motion, AnimatePresence } from 'framer-motion';
 import { publicationOperations, Publication } from '@/lib/publications';
 import { useSubscription } from '@/app/contexts/SubscriptionContext';
-import { useCurrency } from '@/app/contexts/CurrencyContext';
 import { useTranslations, useLocale } from 'next-intl';
 
 const formatText = (text: string) => {
@@ -82,11 +81,6 @@ const platforms = [
   { id: 'shopify', name: 'Shopify' },
 ];
 
-const CURRENCIES = [
-  'MXN', 'USD', 'EUR', 'JPY', 'GBP', 'AUD', 'CAD', 'CHF', 'CNY', 'HKD',
-  'NZD', 'KRW', 'SGD', 'NOK', 'INR', 'RUB', 'ZAR', 'TRY', 'BRL', 'TWD',
-  'DKK', 'PLN', 'THB', 'IDR', 'CZK'
-];
 
 const OPTIMIZATION_TOOL_KEYS = [
   { id: 'background', labelKey: 'background', descKey: 'backgroundDesc' },
@@ -99,12 +93,10 @@ const OPTIMIZATION_TOOL_KEYS = [
 export default function PublicationsPage() {
   const { user } = useUser();
   const { isPro } = useSubscription();
-  const { convert, format, currency, location } = useCurrency();
   const t = useTranslations('publications');
   const locale = useLocale();
   const tc = useTranslations('common');
   const [publications, setPublications] = useState<Publication[]>([]);
-  const [selectedCurrencies, setSelectedCurrencies] = useState<Record<string, string>>({});
   const [loading, setLoading] = useState(true);
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
   const [newPubName, setNewPubName] = useState('');
@@ -1285,35 +1277,12 @@ export default function PublicationsPage() {
                                 </div>
                                 <div className="flex items-center gap-3">
                                   <span className="text-3xl font-semibold text-white tracking-tight">
-                                    {format(
-                                      convert(Number(pub.optimized_content.suggestedPrice || 0), currency, selectedCurrencies[pub.id] || currency),
-                                      selectedCurrencies[pub.id] || currency
-                                    )}
+                                    {new Intl.NumberFormat('en-US', {
+                                      style: 'currency',
+                                      currency: 'USD',
+                                      maximumFractionDigits: 0
+                                    }).format(Number(pub.optimized_content.suggestedPrice || 0))}
                                   </span>
-
-                                  <DropdownMenu>
-                                    <DropdownMenuTrigger asChild>
-                                      <Button
-                                        variant="ghost"
-                                        size="sm"
-                                        className="h-7 bg-white/5 text-white font-medium hover:bg-white/10 border border-white/10 px-2.5 py-1 text-[10px] gap-1.5 rounded-md transition-all outline-none ring-0 focus-visible:ring-0"
-                                      >
-                                        {selectedCurrencies[pub.id] || currency}
-                                        <ChevronDown className="h-3 w-3 opacity-50" />
-                                      </Button>
-                                    </DropdownMenuTrigger>
-                                    <DropdownMenuContent className="max-h-[300px] overflow-y-auto bg-[#111111] border-white/10">
-                                      {CURRENCIES.map((c) => (
-                                        <DropdownMenuItem
-                                          key={c}
-                                          onClick={() => setSelectedCurrencies(prev => ({ ...prev, [pub.id]: c }))}
-                                          className="text-white hover:bg-white/10 cursor-pointer text-xs"
-                                        >
-                                          {c}
-                                        </DropdownMenuItem>
-                                      ))}
-                                    </DropdownMenuContent>
-                                  </DropdownMenu>
                                 </div>
                               </div>
 

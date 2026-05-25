@@ -405,12 +405,7 @@ bg-clip-text text-transparent font-semibold" >
                   {/* Price Block */}
                   <div className="p-4 rounded-xl bg-white/[0.03] border border-white/10 space-y-2 mt-auto">
                     <h5 className="text-[10px] font-bold text-zinc-500 uppercase tracking-wider">PRECIO SUGERIDO POR IA</h5>
-                    <div className="flex items-center justify-between gap-4">
-                      <span className="text-2xl font-bold text-white tracking-tight">$12,999.00</span>
-                      <div className="flex items-center gap-2 px-3 py-1.5 bg-zinc-900 border border-white/10 rounded-lg text-xs font-medium text-zinc-400">
-                        USD <ChevronDown size={14} className="opacity-50" />
-                      </div>
-                    </div>
+                    <span className="text-2xl font-bold text-white tracking-tight">$12,999 USD</span>
                   </div>
                 </div>
               </div>
