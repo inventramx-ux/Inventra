@@ -18,6 +18,7 @@ import {
     Copy,
     Check,
     ChevronRight,
+    BookOpen,
 } from "lucide-react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
@@ -63,6 +64,11 @@ const freeItemKeys = [
         titleKey: "analytics" as const,
         url: "/dashboard/analytics",
         icon: BarChart3,
+    },
+    {
+        titleKey: "guide" as const,
+        url: "/dashboard/guide",
+        icon: BookOpen,
     },
     {
         titleKey: "settings" as const,
