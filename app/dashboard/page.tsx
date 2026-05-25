@@ -59,7 +59,7 @@ export default function DashboardPage() {
 
     return (
         <div className="space-y-8">
-            {/* Welcome Section */}
+            {/* Publications Progress Bar */}
             <div className="flex items-center gap-3.5">
                 <img src="/lpmini.png" alt="Inventra" className="h-8 w-auto object-contain shrink-0" />
                 <div>

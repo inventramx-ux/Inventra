@@ -1,5 +1,5 @@
 "use client"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { useTranslations } from 'next-intl'
 
 import {
@@ -24,6 +24,8 @@ import { usePathname } from "next/navigation"
 import { useUser } from "@clerk/nextjs"
 import { UserButton } from "@clerk/nextjs"
 import { useSubscription } from "@/app/contexts/SubscriptionContext"
+import { publicationOperations, Publication } from "@/lib/publications"
+import { Progress } from "@/components/ui/progress"
 
 import {
     Sidebar,
@@ -74,8 +76,36 @@ export function AppSidebar() {
     const { user } = useUser()
     const { isPro } = useSubscription()
     const [copied, setCopied] = useState(false)
+    const [publications, setPublications] = useState<Publication[]>([])
     const t = useTranslations('sidebar')
     const tc = useTranslations('common')
+
+    // Load publications for progress bar
+    useEffect(() => {
+        const loadPublications = async () => {
+            if (!user?.id) return
+            try {
+                const pubs = await publicationOperations.getAll(user.id)
+                setPublications(pubs)
+            } catch (error) {
+                console.error("Error loading publications:", error)
+            }
+        }
+        if (user) loadPublications()
+    }, [user])
+
+    // Calculate publications from current month
+    const now = new Date()
+    const currentMonth = now.getMonth()
+    const currentYear = now.getFullYear()
+    
+    const publicationsThisMonth = publications.filter(p => {
+      const pubDate = new Date(p.created_at)
+      return pubDate.getMonth() === currentMonth && pubDate.getFullYear() === currentYear
+    }).length
+    
+    const MAX_PUBLICATIONS_PER_MONTH = 3
+    const progressPercentage = isPro ? 100 : Math.min((publicationsThisMonth / MAX_PUBLICATIONS_PER_MONTH) * 100, 100)
 
     const copyEmail = () => {
         navigator.clipboard.writeText("inventramx@gmail.com")
@@ -188,6 +218,14 @@ export function AppSidebar() {
 
                 <SidebarSeparator className="bg-white/10" />
             </SidebarContent>
+
+            {/* Publications Progress Bar */}
+            <div className="mx-3 mb-2 px-2">
+                <Progress 
+                    value={progressPercentage}
+                    className="h-1.5 bg-white/10 [&>*]:bg-blue-500"
+                />
+            </div>
 
             {/* SaaS Admin Dashboard Copyright Banner */}
             <div className="mx-3 my-2 px-3.5 py-1 group-data-[state=collapsed]:hidden text-left select-none">
