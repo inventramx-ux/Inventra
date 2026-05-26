@@ -13,7 +13,6 @@ import Link from "next/link"
 import { publicationOperations, Publication } from "@/lib/publications"
 import { PublicationAnalyticsSection } from "@/components/publication-analytics-card"
 import { useUser } from "@clerk/nextjs"
-import { useTranslations, useLocale } from 'next-intl'
 
 const STATUS_COLORS = {
     optimized: "#10b981", // emerald-500
@@ -26,10 +25,7 @@ export default function AnalyticsPage() {
     const [loading, setLoading] = useState(true)
     const { isPro, isLoading: subLoading } = useSubscription()
     const [timeRange, setTimeRange] = useState<'day' | 'week' | 'month' | 'year'>('month')
-    const t = useTranslations('analytics')
-    const tc = useTranslations('common')
-    const locale = useLocale()
-    const dateLocale = locale === 'es' ? 'es-MX' : 'en-US'
+    const dateLocale = 'es-MX'
 
     const loadData = React.useCallback(async () => {
         if (!user?.id) return
@@ -116,14 +112,14 @@ export default function AnalyticsPage() {
 
         // 2. Status Distribution
         const statusDistribution = [
-            { name: tc('optimized'), value: publications.filter(p => p.optimized_content?.title).length, color: STATUS_COLORS.optimized },
-            { name: tc('draft'), value: publications.filter(p => !p.optimized_content?.title).length, color: STATUS_COLORS.draft },
+            { name: "Optimizada", value: publications.filter(p => p.optimized_content?.title).length, color: STATUS_COLORS.optimized },
+            { name: "Borrador", value: publications.filter(p => !p.optimized_content?.title).length, color: STATUS_COLORS.draft },
         ].filter(d => d.value > 0)
 
         // 3. Platform Distribution
         const platformCounts: Record<string, number> = {}
         publications.forEach(p => {
-            const platform = p.platform || t('unspecified')
+            const platform = p.platform || "No especificada"
             platformCounts[platform] = (platformCounts[platform] || 0) + 1
         })
         const platformDistribution = Object.entries(platformCounts)
@@ -145,7 +141,7 @@ export default function AnalyticsPage() {
                 optimizationRate
             }
         }
-    }, [publications, timeRange, tc, t, dateLocale])
+    }, [publications, timeRange, dateLocale])
 
     if (loading || subLoading) {
         return (
@@ -165,13 +161,13 @@ export default function AnalyticsPage() {
         return (
             <div className="flex flex-col items-center justify-center min-h-[50vh] text-center">
                 <ShoppingBag className="h-12 w-12 text-gray-600 mb-4" />
-                <h2 className="text-xl font-semibold text-white">{t('noData')}</h2>
+                <h2 className="text-xl font-semibold text-white">Sin Datos</h2>
                 <p className="text-gray-400 mt-2 max-w-sm">
-                    {t('noDataDescription')}
+                    Crea publicaciones para ver análisis
                 </p>
                 <Link href="/dashboard/publications" className="mt-6">
                     <Button variant="outline" className="border-white/10 text-white hover:bg-white/5">
-                        {t('createPublication')}
+                        Crear Publicación
                     </Button>
                 </Link>
             </div>
@@ -183,15 +179,15 @@ export default function AnalyticsPage() {
             <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
                 <div>
                     <div className="flex items-center gap-2">
-                        <h1 className="text-2xl font-semibold text-white">{t('title')}</h1>
+                        <h1 className="text-2xl font-semibold text-white">Análisis</h1>
                         {isPro ? (
                             <Badge className="bg-blue-500/10 text-blue-400 border-blue-500/20">Pro</Badge>
                         ) : (
-                            <Badge variant="outline" className="text-gray-400 border-white/10">{tc('free')}</Badge>
+                            <Badge variant="outline" className="text-gray-400 border-white/10">Gratis</Badge>
                         )}
                     </div>
                     <p className="text-gray-400 mt-1">
-                        {t('subtitle')}
+                        Datos detallados sobre tu desempeño
                     </p>
                 </div>
 
@@ -205,7 +201,7 @@ export default function AnalyticsPage() {
                                 : "text-gray-400 hover:text-white"
                                 }`}
                         >
-                            {t(range)}
+                            {range === 'day' ? 'Día' : range === 'week' ? 'Semana' : range === 'month' ? 'Mes' : 'Año'}
                         </button>
                     ))}
                 </div>
@@ -215,7 +211,7 @@ export default function AnalyticsPage() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <Card className="bg-white/5 border-white/10">
                     <CardHeader className="pb-2">
-                        <CardDescription className="text-gray-400">{t('totalPublications')}</CardDescription>
+                        <CardDescription className="text-gray-400">Total de Publicaciones</CardDescription>
                         <CardTitle className="text-2xl text-white font-bold">
                             {stats.metrics.totalPublications}
                         </CardTitle>
@@ -223,13 +219,13 @@ export default function AnalyticsPage() {
                     <CardContent>
                         <div className="flex items-center text-xs text-gray-400 gap-1">
                             <ShoppingBag className="h-3 w-3" />
-                            <span>{t('contentCreated')}</span>
+                            <span>Contenido creado</span>
                         </div>
                     </CardContent>
                 </Card>
                 <Card className="bg-white/5 border-white/10">
                     <CardHeader className="pb-2">
-                        <CardDescription className="text-gray-400">{t('aiOptimizations')}</CardDescription>
+                        <CardDescription className="text-gray-400">Optimizaciones IA</CardDescription>
                         <CardTitle className="text-2xl text-white font-bold">
                             {stats.metrics.totalOptimized}
                         </CardTitle>
@@ -237,13 +233,13 @@ export default function AnalyticsPage() {
                     <CardContent>
                         <div className="flex items-center text-xs text-gray-400 gap-1">
                             <Sparkles className="h-3 w-3 text-emerald-400" />
-                            <span>{t('aiAssisted')}</span>
+                            <span>Asistidas por IA</span>
                         </div>
                     </CardContent>
                 </Card>
                 <Card className="bg-white/5 border-white/10">
                     <CardHeader className="pb-2">
-                        <CardDescription className="text-gray-400">{t('successRate')}</CardDescription>
+                        <CardDescription className="text-gray-400">Tasa de Éxito</CardDescription>
                         <CardTitle className="text-2xl text-white font-bold">
                             {Math.round(stats.metrics.optimizationRate)}%
                         </CardTitle>
@@ -251,7 +247,7 @@ export default function AnalyticsPage() {
                     <CardContent>
                         <div className="flex items-center text-xs text-blue-400 gap-1">
                             <TrendingUp className="h-3 w-3" />
-                            <span>{t('flowEfficiency')}</span>
+                            <span>Eficiencia del flujo</span>
                         </div>
                     </CardContent>
                 </Card>
@@ -262,7 +258,7 @@ export default function AnalyticsPage() {
                 {/* Activity Chart */}
                 <Card className="bg-white/5 border-white/10 lg:col-span-2 min-w-0 overflow-hidden">
                     <CardHeader>
-                        <CardTitle className="text-white text-lg font-medium">{t('publicationActivity')}</CardTitle>
+                        <CardTitle className="text-white text-lg font-medium">Actividad de Publicaciones</CardTitle>
                     </CardHeader>
                     <CardContent className="h-[300px] w-full mt-4">
                         <ResponsiveContainer width="100%" height="100%">
@@ -278,7 +274,7 @@ export default function AnalyticsPage() {
                                 <Area
                                     type="monotone"
                                     dataKey="count"
-                                    name={t('publications')}
+                                    name="Publicaciones"
                                     stroke="#3b82f6"
                                     fill="#3b82f6"
                                     fillOpacity={1}
@@ -299,17 +295,17 @@ export default function AnalyticsPage() {
                 {/* Platform Distribution */}
                 <Card className="bg-white/5 border-white/10 relative overflow-hidden min-w-0">
                     <CardHeader>
-                        <CardTitle className="text-white">{t('salesChannels')}</CardTitle>
-                        <CardDescription className="text-gray-400">{t('marketplaceDistribution')}</CardDescription>
+                        <CardTitle className="text-white">Canales de Venta</CardTitle>
+                        <CardDescription className="text-gray-400">Distribución por marketplace</CardDescription>
                     </CardHeader>
                     <CardContent className="h-[300px] w-full mt-4">
                         {!isPro && (
                             <div className="absolute inset-0 z-10 flex flex-col items-center justify-center bg-black/60 backdrop-blur-sm p-6 text-center">
                                 <img src="/lpmini.png" alt="lpmini" className="h-8 w-8 mb-3" />
-                                <h3 className="text-white font-semibold mb-2">{t('proSection')}</h3>
-                                <p className="text-white text-sm mb-4">{t('proChannelsDesc')}</p>
+                                <h3 className="text-white font-semibold mb-2">Función Pro</h3>
+                                <p className="text-white text-sm mb-4">Actualiza a Pro para ver el análisis detallado de canales</p>
                                 <Link href="/dashboard/upgrade">
-                                    <Button size="sm" className="bg-white text-black hover:bg-gray-100 border-transparent text-xs font-bold">{t('upgradeNow')}</Button>
+                                    <Button size="sm" className="bg-white text-black hover:bg-gray-100 border-transparent text-xs font-bold">Actualizar Ahora</Button>
                                 </Link>
                             </div>
                         )}
@@ -320,7 +316,7 @@ export default function AnalyticsPage() {
                                     <XAxis type="number" hide />
                                     <YAxis dataKey="name" type="category" stroke="#94a3b8" fontSize={12} tickLine={false} axisLine={false} width={100} />
                                     <Tooltip cursor={{ fill: '#ffffff05' }} contentStyle={{ backgroundColor: '#0f172a', border: '1px solid #ffffff10', borderRadius: '8px' }} itemStyle={{ color: '#fff' }} labelStyle={{ color: '#fff' }} />
-                                    <Bar dataKey="count" name={t('publications')} fill="#60a5fa" radius={[0, 4, 4, 0]} barSize={20} />
+                                    <Bar dataKey="count" name="Publicaciones" fill="#60a5fa" radius={[0, 4, 4, 0]} barSize={20} />
                                 </BarChart>
                             </ResponsiveContainer>
                         </div>
@@ -330,17 +326,17 @@ export default function AnalyticsPage() {
                 {/* Status Distribution */}
                 <Card className="bg-white/5 border-white/10 relative overflow-hidden min-w-0">
                     <CardHeader>
-                        <CardTitle className="text-white">{t('optimizationStatus')}</CardTitle>
-                        <CardDescription className="text-gray-400">{t('draftsVsFinal')}</CardDescription>
+                        <CardTitle className="text-white">Estado de Optimización</CardTitle>
+                        <CardDescription className="text-gray-400">Borradores vs Finales</CardDescription>
                     </CardHeader>
                     <CardContent className="h-[300px] w-full flex items-center justify-center">
                         {!isPro && (
                             <div className="absolute inset-0 z-10 flex flex-col items-center justify-center bg-black/60 backdrop-blur-sm p-6 text-center">
                                 <img src="/lpmini.png" alt="lpmini" className="h-8 w-8 mb-3" />
-                                <h3 className="text-white font-semibold mb-2">{t('proSection')}</h3>
-                                <p className="text-white text-sm mb-4">{t('proDraftsDesc')}</p>
+                                <h3 className="text-white font-semibold mb-2">Función Pro</h3>
+                                <p className="text-white text-sm mb-4">Actualiza a Pro para ver gráficos de estado</p>
                                 <Link href="/dashboard/upgrade">
-                                    <Button size="sm" className="bg-white text-black hover:bg-gray-100 border-transparent text-xs font-bold">{t('upgradeNow')}</Button>
+                                    <Button size="sm" className="bg-white text-black hover:bg-gray-100 border-transparent text-xs font-bold">Actualizar Ahora</Button>
                                 </Link>
                             </div>
                         )}

@@ -7,18 +7,15 @@ import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Crown, Check, ArrowRight, ExternalLink, XCircle } from "lucide-react"
 import Link from "next/link"
-import { useTranslations } from 'next-intl'
 
 export default function SettingsPage() {
     const { isPro } = useSubscription()
-    const t = useTranslations('settings')
-    const tc = useTranslations('common')
 
     return (
         <div className="space-y-8">
             <div>
-                <h1 className="text-2xl font-semibold text-white">{t('title')}</h1>
-                <p className="text-gray-400 mt-1">{t('subtitle')}</p>
+                <h1 className="text-2xl font-semibold text-white">Configuración</h1>
+                <p className="text-gray-400 mt-1">Gestiona tu cuenta y suscripción</p>
             </div>
 
             {/* Plan Info */}
@@ -27,7 +24,7 @@ export default function SettingsPage() {
                     <div className="flex items-center justify-between">
                         <CardTitle className="text-white flex items-center gap-2">
                             <Crown className={`h-5 w-5 ${isPro ? "text-amber-400" : "text-gray-500"}`} />
-                            {t('yourPlan')}
+                            Tu Plan
                         </CardTitle>
                         <Badge
                             variant="outline"
@@ -37,22 +34,22 @@ export default function SettingsPage() {
                                     : "bg-white/10 text-gray-300 border-white/20"
                             }
                         >
-                            {isPro ? tc('pro') : tc('free')}
+                            {isPro ? "Pro" : "Gratis"}
                         </Badge>
                     </div>
                 </CardHeader>
                 <CardContent>
                     {isPro ? (
                         <div className="space-y-3">
-                            <p className="text-gray-300">{t('fullAccessDesc')}</p>
+                            <p className="text-gray-300">Tienes acceso completo a todas las funciones premium</p>
                             <ul className="space-y-2">
                                 {[
-                                    t('unlimitedInvoices'),
-                                    t('unlimitedClients'),
-                                    t('advancedCustomization'),
-                                    t('prioritySupport'),
-                                    t('noWatermark'),
-                                    t('billingAnalytics'),
+                                    "Publicaciones ilimitadas",
+                                    "Optimización de contenido",
+                                    "Análisis avanzado",
+                                    "Soporte prioritario",
+                                    "Sin marca de agua",
+                                    "Análisis de facturas",
                                 ].map((feature) => (
                                     <li key={feature} className="flex items-center gap-2 text-sm text-gray-400">
                                         <Check className="h-4 w-4 text-amber-400 flex-shrink-0" />
@@ -62,14 +59,14 @@ export default function SettingsPage() {
                             </ul>
 
                             <div className="pt-6 border-t border-white/10 mt-6">
-                                <h4 className="text-white font-medium mb-3">{t('manageSubscription')}</h4>
+                                <h4 className="text-white font-medium mb-3">Gestionar Suscripción</h4>
                                 <div className="flex flex-col sm:flex-row gap-3">
                                     <Button
                                         asChild
                                         className="bg-white/10 text-white hover:bg-white/20 border-white/10 gap-2"
                                     >
                                         <a href="https://www.paypal.com/myaccount/autopay/" target="_blank" rel="noopener noreferrer">
-                                            {t('manageInPaypal')}
+                                            Gestionar en PayPal
                                             <ExternalLink className="h-4 w-4" />
                                         </a>
                                     </Button>
@@ -79,43 +76,43 @@ export default function SettingsPage() {
                                         className="text-gray-400 hover:text-red-400 hover:bg-red-400/10 gap-2"
                                     >
                                         <a href="https://www.paypal.com/myaccount/autopay/" target="_blank" rel="noopener noreferrer">
-                                            {t('cancelSubscription')}
+                                            Cancelar Suscripción
                                             <XCircle className="h-4 w-4" />
                                         </a>
                                     </Button>
                                 </div>
                                 <p className="text-xs text-gray-500 mt-4 italic">
-                                    {t('paypalNote')}
+                                    Puedes cambiar tu suscripción en cualquier momento desde tu cuenta de PayPal
                                 </p>
                             </div>
                         </div>
                     ) : (
                         <div className="space-y-4">
                             <p className="text-gray-300">
-                                {t('freeDescription')}
+                                El plan gratuito te permite crear y optimizar publicaciones limitadas
                             </p>
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
                                 <div className="text-gray-400">
-                                    <p className="text-gray-500 mb-1">{t('includes')}</p>
+                                    <p className="text-gray-500 mb-1">Incluye</p>
                                     <ul className="space-y-1">
                                         <li className="flex items-center gap-1">
-                                            <Check className="h-3 w-3 text-gray-500" /> {t('tenInvoicesMonth')}
+                                            <Check className="h-3 w-3 text-gray-500" /> 3 publicaciones por mes
                                         </li>
                                         <li className="flex items-center gap-1">
-                                            <Check className="h-3 w-3 text-gray-500" /> {t('fiveClients')}
+                                            <Check className="h-3 w-3 text-gray-500" /> Optimización básica
                                         </li>
                                         <li className="flex items-center gap-1">
-                                            <Check className="h-3 w-3 text-gray-500" /> {t('basicTemplates')}
+                                            <Check className="h-3 w-3 text-gray-500" /> Plantillas básicas
                                         </li>
                                         <li className="flex items-center gap-1">
-                                            <Check className="h-3 w-3 text-gray-500" /> {t('emailSupport')}
+                                            <Check className="h-3 w-3 text-gray-500" /> Soporte por email
                                         </li>
                                     </ul>
                                 </div>
                             </div>
                             <Link href="/checkout">
                                 <Button className="bg-white text-black font-semibold gap-2 mt-2">
-                                    {t('upgradeToPro')}
+                                    Actualizar a Pro
                                     <ArrowRight className="h-4 w-4" />
                                 </Button>
                             </Link>
@@ -127,7 +124,7 @@ export default function SettingsPage() {
             {/* Clerk User Profile */}
             <Card className="bg-white/5 border-white/10 overflow-hidden">
                 <CardHeader>
-                    <CardTitle className="text-white">{t('accountTitle')}</CardTitle>
+                    <CardTitle className="text-white">Información de la Cuenta</CardTitle>
                 </CardHeader>
                 <CardContent>
                     <UserProfile

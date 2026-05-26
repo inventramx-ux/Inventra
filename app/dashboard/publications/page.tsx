@@ -34,7 +34,6 @@ import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { motion, AnimatePresence } from 'framer-motion';
 import { publicationOperations, Publication } from '@/lib/publications';
 import { useSubscription } from '@/app/contexts/SubscriptionContext';
-import { useTranslations, useLocale } from 'next-intl';
 
 const formatText = (text: string) => {
   if (!text) return null;
@@ -93,9 +92,6 @@ const OPTIMIZATION_TOOL_KEYS = [
 export default function PublicationsPage() {
   const { user } = useUser();
   const { isPro } = useSubscription();
-  const t = useTranslations('publications');
-  const locale = useLocale();
-  const tc = useTranslations('common');
   const [publications, setPublications] = useState<Publication[]>([]);
   const [loading, setLoading] = useState(true);
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
@@ -141,7 +137,7 @@ export default function PublicationsPage() {
       setDaysUntilReset(stats.daysUntilReset);
     } catch (err: any) {
       console.error('Error loading publications:', err);
-      setError(err.message || t('errorLoading'));
+      setError(err.message || 'Error al cargar publicaciones');
     } finally {
       setLoading(false);
     }
@@ -161,11 +157,11 @@ export default function PublicationsPage() {
       setNewPubName('');
       setIsCreateModalOpen(false);
       setExpandedId(newPub.id);
-      setSuccess(t('createdSuccess'));
+      setSuccess('Publicación creada exitosamente');
       setTimeout(() => setSuccess(null), 3000);
     } catch (err: any) {
       console.error('Error creating publication:', err);
-      setError(err.message || t('errorCreating'));
+      setError(err.message || 'Error al crear publicación');
     }
   };
 
@@ -343,7 +339,7 @@ export default function PublicationsPage() {
           additionalOptimizedImages: finalAdditionals
         }
       });
-      setSuccess(t('optimizedSuccess'));
+      setSuccess('Publicación optimizada exitosamente');
       setTimeout(() => setSuccess(null), 3000);
     } catch (err: any) {
       console.error('Error in optimization flow:', err);
@@ -351,7 +347,7 @@ export default function PublicationsPage() {
         err instanceof TypeError ||
         err.message?.toLowerCase().includes('failed to fetch') ||
         err.message?.toLowerCase().includes('network');
-      setError(isConnectionError ? t('errorConnection') : t('errorOptimizing'));
+      setError(isConnectionError ? 'Error de conexión. Intenta nuevamente.' : 'Error al optimizar publicación');
     } finally {
       setIsOptimizing(null);
     }
@@ -390,9 +386,9 @@ export default function PublicationsPage() {
     <div className="space-y-6 max-w-5xl mx-auto">
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-bold text-white">{t('title')}</h1>
+          <h1 className="text-3xl font-bold text-white">Publicaciones</h1>
           <div className="flex flex-col gap-1 mt-2">
-            <p className="text-gray-400">{t('subtitle')}</p>
+            <p className="text-gray-400">Crea y optimiza tus anuncios para vender más</p>
             {!isPro && (
               <div className="flex items-center gap-2 mt-1">
                 <Badge variant="outline" className={`${publicationsCount >= 3 ? 'border-zinc-500/30 text-zinc-400 bg-zinc-500/10' : 'border-white/30 text-white bg-white/10'}`}>
@@ -412,7 +408,7 @@ export default function PublicationsPage() {
           disabled={!isPro && publicationsCount >= 3}
           className="bg-white text-black hover:bg-gray-200 disabled:opacity-50 disabled:cursor-not-allowed"
         >
-          <Plus className="mr-2 h-4 w-4" /> {t('newPublication')}
+          <Plus className="mr-2 h-4 w-4" /> Nueva Publicación
         </Button>
       </div>
 
@@ -432,11 +428,11 @@ export default function PublicationsPage() {
               <AlertDescription>
                 <div>{error}</div>
                 <div className="mt-2 text-xs text-gray-200 text-center">
-                  {t('retryGuideHint')}
+                  Haz clic para ver guía de resolución
                 </div>
                 {showRetryGuide && (
                   <div className="mt-3 rounded-md bg-white/10 border border-white/10 px-3 py-2 text-sm text-gray-100 text-center">
-                    {t('retryGuideText')}
+                    Verifica tu conexión a internet, intenta nuevamente o contacta soporte
                   </div>
                 )}
               </AlertDescription>
@@ -449,16 +445,16 @@ export default function PublicationsPage() {
       {loading ? (
         <div className="flex flex-col items-center justify-center py-20 gap-4">
           <Loader2 className="h-8 w-8 animate-spin text-white" />
-          <p className="text-gray-400">{t('loadingPublications')}</p>
+          <p className="text-gray-400">Cargando publicaciones...</p>
         </div>
       ) : publications.length === 0 ? (
         <Card className="bg-[#0a0a0a] border-white/10 p-12 text-center">
           <div className="flex justify-center mb-4">
           </div>
-          <h2 className="text-xl font-semibold text-white mb-2">{t('noPublications')}</h2>
-          <p className="text-gray-400 mb-6">{t('noPublicationsDesc')}</p>
+          <h2 className="text-xl font-semibold text-white mb-2">Sin Publicaciones Aún</h2>
+          <p className="text-gray-400 mb-6">Crea tu primera publicación para comenzar</p>
           <Button onClick={() => setIsCreateModalOpen(true)} variant="outline" className="border-white/10 text-white hover:bg-white/5">
-            {t('createPublication')}
+            Crear Publicación
           </Button>
         </Card>
       ) : (
@@ -524,12 +520,12 @@ export default function PublicationsPage() {
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                         {/* Edit Section */}
                         <div className="space-y-6">
-                          <h4 className="text-sm font-semibold text-gray-400 uppercase tracking-wider">{t('configSection')}</h4>
+                          <h4 className="text-sm font-semibold text-gray-400 uppercase tracking-wider">Configuración</h4>
 
                           <div className="space-y-6">
                             {/* 1. Imagen (OBLIGATORIA) */}
                             <div className="space-y-4">
-                              <Label className="text-gray-400 text-xs uppercase tracking-wider font-bold">{t('mainImage')}</Label>
+                              <Label className="text-gray-400 text-xs uppercase tracking-wider font-bold">Imagen Principal</Label>
                               <div className="relative group">
                                 <Label
                                   htmlFor="file-upload"
@@ -540,7 +536,7 @@ export default function PublicationsPage() {
                                       <img src={pub.product_data.imageUrl} alt="Preview" className="h-full w-full object-cover" />
                                     ) : (
                                       <div className="flex flex-col items-center gap-2">
-                                        <span className="text-[10px] text-gray-500 font-medium whitespace-nowrap">{t('clickToUpload')}</span>
+                                        <span className="text-[10px] text-gray-500 font-medium whitespace-nowrap">Haz clic para subir</span>
                                       </div>
                                     )}
                                   </div>
@@ -568,14 +564,14 @@ export default function PublicationsPage() {
                               {/* Galería de Imágenes Adicionales */}
                               <div className="space-y-3">
                                 <div className="flex items-center justify-between">
-                                  <Label className="text-gray-400 text-xs uppercase tracking-wider font-bold">{t('additionalImages')} ({pub.product_data.additionalImages?.length || 0}/10)</Label>
+                                  <Label className="text-gray-400 text-xs uppercase tracking-wider font-bold">Imágenes Adicionales ({pub.product_data.additionalImages?.length || 0}/10)</Label>
                                   <Button
                                     variant="ghost"
                                     size="sm"
                                     className="h-7 text-[10px] text-white hover:text-zinc-300 hover:bg-white/10"
                                     onClick={() => document.getElementById(`extra-upload-${pub.id}`)?.click()}
                                   >
-                                    <Plus className="h-3 w-3 mr-1" /> {t('add')}
+                                    <Plus className="h-3 w-3 mr-1" /> Añadir
                                   </Button>
                                   <input
                                     id={`extra-upload-${pub.id}`}
@@ -657,7 +653,7 @@ export default function PublicationsPage() {
                                 <div className="pt-4 space-y-4">
                                   <div className="flex items-center justify-between">
                                     <div className="flex items-center gap-2">
-                                      <h5 className="text-[10px] font-bold text-zinc-400 uppercase tracking-[0.2em]">{t('imageOptimization')}</h5>
+                                      <h5 className="text-[10px] font-bold text-zinc-400 uppercase tracking-[0.2em]">Optimización de Imágenes</h5>
                                     </div>
 
 
@@ -683,7 +679,7 @@ export default function PublicationsPage() {
                                           onClick={() => setActiveOptTool(prev => ({ ...prev, [pub.id]: tool.id }))}
                                           className={`relative px-4 py-2 rounded-lg transition-all flex items-center group ${isActive ? 'bg-white text-black shadow-[0_0_15px_rgba(255,255,255,0.2)]' : 'text-gray-500 hover:text-white hover:bg-white/5'}`}
                                         >
-                                          <span className="text-[10px] font-bold uppercase tracking-wider whitespace-nowrap">{t(tool.labelKey)}</span>
+                                          <span className="text-[10px] font-bold uppercase tracking-wider whitespace-nowrap">{tool.labelKey === 'background' ? 'Fondo' : tool.labelKey === 'resolution' ? 'Resolución' : tool.labelKey === 'color' ? 'Color' : tool.labelKey === 'sharpness' ? 'Nitidez' : 'Exportar'}</span>
                                           {count > 0 && !isActive && (
                                             <span className="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-white text-[8px] font-bold text-black ring-2 ring-[#0a0a0a] z-10">
                                               {count}
@@ -809,7 +805,7 @@ export default function PublicationsPage() {
                                         <div className="pt-2">
                                           {(activeOptTool[pub.id] || 'background') === 'background' && pub.product_data.imageOptimization?.removeBackgroundIndices?.length! > 0 && (
                                             <motion.div initial={{ opacity: 0, y: 5 }} animate={{ opacity: 1, y: 0 }} className="flex flex-col gap-2 p-3 rounded-xl bg-white/[0.02] border border-white/5">
-                                              <Label className="text-[10px] text-gray-500 uppercase font-black tracking-widest pl-1">{t('resultBackground')}</Label>
+                                              <Label className="text-[10px] text-gray-500 uppercase font-black tracking-widest pl-1">Fondo del Resultado</Label>
                                               <div className="flex gap-2">
                                                 {['transparent', 'white', 'black'].map((color) => (
                                                   <Button
@@ -831,7 +827,7 @@ export default function PublicationsPage() {
 
                                           {(activeOptTool[pub.id] || 'background') === 'enhance' && pub.product_data.imageOptimization?.autoEnhanceIndices?.length! > 0 && (
                                             <motion.div initial={{ opacity: 0, y: 5 }} animate={{ opacity: 1, y: 0 }} className="flex flex-col gap-2 p-3 rounded-xl bg-white/[0.02] border border-white/5">
-                                              <Label className="text-[10px] text-gray-500 uppercase font-black tracking-widest pl-1">{t('enhanceMode')}</Label>
+                                              <Label className="text-[10px] text-gray-500 uppercase font-black tracking-widest pl-1">Modo de Mejora</Label>
                                               <div className="flex gap-2">
                                                 {[{ id: 'natural', label: t('natural') }, { id: 'vivid', label: t('vivid') }, { id: 'crisp', label: t('crisp') }].map((mode) => (
                                                   <Button
@@ -854,7 +850,7 @@ export default function PublicationsPage() {
                                           {(activeOptTool[pub.id] || 'background') === 'export' && (
                                             <motion.div initial={{ opacity: 0, y: 5 }} animate={{ opacity: 1, y: 0 }} className="space-y-4">
                                               <div className="space-y-2">
-                                                <Label className="text-[10px] text-gray-500 uppercase font-black tracking-widest pl-1">{t('publishDestination')}</Label>
+                                                <Label className="text-[10px] text-gray-500 uppercase font-black tracking-widest pl-1">Destino de Publicación</Label>
                                                 <DropdownMenu>
                                                   <DropdownMenuTrigger asChild>
                                                     <Button variant="outline" className="w-full h-11 bg-black/60 border-white/10 text-white justify-between px-4 rounded-xl hover:bg-black/80 transition-all">
@@ -863,7 +859,7 @@ export default function PublicationsPage() {
                                                           {pub.product_data.imageOptimization?.preset === 'mercadolibre' ? 'Mercado Libre (1200 x 1200)' :
                                                             pub.product_data.imageOptimization?.preset === 'amazon' ? 'Amazon (1600 x 1600)' :
                                                               pub.product_data.imageOptimization?.preset === 'pinterest' ? 'Pinterest (1000 x 1500)' :
-                                                                pub.product_data.imageOptimization?.preset === 'custom' ? `${t('custom')} (${pub.product_data.imageOptimization?.targetWidth || 0} x ${pub.product_data.imageOptimization?.targetHeight || 0})` : t('originalQuality')}
+                                                                pub.product_data.imageOptimization?.preset === 'custom' ? `$Personalizado (${pub.product_data.imageOptimization?.targetWidth || 0} x ${pub.product_data.imageOptimization?.targetHeight || 0})` : t('originalQuality')}
                                                         </span>
                                                       </span>
                                                       <ChevronDown className="h-4 w-4 opacity-50" />
@@ -905,7 +901,7 @@ export default function PublicationsPage() {
 
                                               <div className="grid grid-cols-2 gap-4">
                                                 <div className="space-y-1.5">
-                                                  <Label className="text-[10px] text-gray-500 uppercase font-bold tracking-tight">{t('widthPx')}</Label>
+                                                  <Label className="text-[10px] text-gray-500 uppercase font-bold tracking-tight">Ancho (px)</Label>
                                                   <Input
                                                     type="number"
                                                     value={pub.product_data.imageOptimization?.targetWidth || ''}
@@ -927,7 +923,7 @@ export default function PublicationsPage() {
                                                   />
                                                 </div>
                                                 <div className="space-y-1.5">
-                                                  <Label className="text-[10px] text-gray-500 uppercase font-bold tracking-tight">{t('heightPx')}</Label>
+                                                  <Label className="text-[10px] text-gray-500 uppercase font-bold tracking-tight">Alto (px)</Label>
                                                   <Input
                                                     type="number"
                                                     value={pub.product_data.imageOptimization?.targetHeight || ''}
@@ -963,7 +959,7 @@ export default function PublicationsPage() {
                             <div className="space-y-4">
                               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                 <div className="grid gap-2">
-                                  <Label className="text-gray-400 text-xs">{t('productTitle')}</Label>
+                                  <Label className="text-gray-400 text-xs">Título del Producto</Label>
                                   <Input
                                     value={pub.name}
                                     onChange={(e) => handleUpdate(pub.id, { name: e.target.value }, true)}
@@ -971,7 +967,7 @@ export default function PublicationsPage() {
                                   />
                                 </div>
                                 <div className="grid gap-2">
-                                  <Label className="text-gray-400 text-xs">{t('salesPlatform')}</Label>
+                                  <Label className="text-gray-400 text-xs">Plataforma de Venta</Label>
                                   <DropdownMenu>
                                     <DropdownMenuTrigger asChild>
                                       <Button variant="outline" className="h-10 w-full bg-black/60 border-white/10 text-white justify-between px-3 font-normal hover:bg-black/80">
@@ -996,7 +992,7 @@ export default function PublicationsPage() {
 
                               <div className="grid gap-2">
                                 <div className="flex items-center justify-between">
-                                  <Label className="text-gray-400 text-xs">{t('detailedDescription')}</Label>
+                                  <Label className="text-gray-400 text-xs">Descripción Detallada</Label>
                                   <input
                                     type="checkbox"
                                     checked={isFieldEnabled(pub, 'description')}
@@ -1010,12 +1006,12 @@ export default function PublicationsPage() {
                                     product_data: { ...pub.product_data, description: e.target.value }
                                   }, true)}
                                   className="min-h-[100px] w-full rounded-md border border-white/10 bg-black/60 px-3 py-2 text-sm text-white focus:ring-1 focus:ring-white/20 transition-all outline-none"
-                                  placeholder={t('describeProduct')}
+                                  placeholder=Describe tu producto...
                                 />
                               </div>
 
                               <div className="grid gap-2">
-                                <Label className="text-gray-400 text-xs">{t('writingStyle')}</Label>
+                                <Label className="text-gray-400 text-xs">Estilo de Escritura</Label>
                                 <div className="grid grid-cols-2 gap-2">
                                   {[{ key: 'persuasive', value: 'Persuasivo' }, { key: 'informative', value: 'Informativo' }, { key: 'professional', value: 'Profesional' }, { key: 'creative', value: 'Creativo' }].map((style) => (
                                     <Button
@@ -1025,14 +1021,14 @@ export default function PublicationsPage() {
                                       onClick={() => handleUpdate(pub.id, { product_data: { ...pub.product_data, style: style.value } })}
                                       className={`text-[10px] h-8 border-white/10 ${pub.product_data.style === style.value ? 'bg-white text-black border-white' : 'bg-black/40 text-gray-400 hover:bg-white/5'}`}
                                     >
-                                      {t(style.key as any)}
+                                      {style.value}
                                     </Button>
                                   ))}
                                 </div>
                               </div>
 
                               <div className="grid gap-2">
-                                <Label className="text-gray-400 text-xs">{t('publicationLength')}</Label>
+                                <Label className="text-gray-400 text-xs">Longitud de la Publicación</Label>
                                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
                                   {[{ id: 'short', label: t('short') }, { id: 'medium', label: t('medium') }, { id: 'long', label: t('long') }].map((len) => (
                                     <Button
@@ -1070,11 +1066,11 @@ export default function PublicationsPage() {
                                   >
                                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                       <div className="grid gap-2">
-                                        <div className="flex justify-between items-center"><Label className="text-[10px] text-gray-500">{t('price')}</Label><input type="checkbox" checked={isFieldEnabled(pub, 'price')} onChange={() => toggleField(pub, 'price')} className="h-2 w-2 accent-white/40" /></div>
+                                        <div className="flex justify-between items-center"><Label className="text-[10px] text-gray-500">Precio</Label><input type="checkbox" checked={isFieldEnabled(pub, 'price')} onChange={() => toggleField(pub, 'price')} className="h-2 w-2 accent-white/40" /></div>
                                         <Input value={pub.product_data.price || ''} onChange={(e) => handleUpdate(pub.id, { product_data: { ...pub.product_data, price: e.target.value } }, true)} placeholder="0.00" className="h-8 bg-black/40 border-white/5 text-xs text-white focus:ring-white/20" />
                                       </div>
                                       <div className="grid gap-2">
-                                        <Label className="text-[10px] text-gray-500">{t('salesPlatform')}</Label>
+                                        <Label className="text-[10px] text-gray-500">Plataforma de Venta</Label>
                                         <DropdownMenu>
                                           <DropdownMenuTrigger asChild>
                                             <Button variant="outline" className="h-8 w-full bg-black/40 border-white/5 text-white justify-between px-2 text-xs font-normal hover:bg-black/60">
@@ -1099,37 +1095,37 @@ export default function PublicationsPage() {
 
                                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                       <div className="grid gap-2">
-                                        <div className="flex justify-between items-center"><Label className="text-[10px] text-gray-500">{t('brand')}</Label><input type="checkbox" checked={isFieldEnabled(pub, 'brand')} onChange={() => toggleField(pub, 'brand')} className="h-2 w-2 accent-white/40" /></div>
+                                        <div className="flex justify-between items-center"><Label className="text-[10px] text-gray-500">Marca</Label><input type="checkbox" checked={isFieldEnabled(pub, 'brand')} onChange={() => toggleField(pub, 'brand')} className="h-2 w-2 accent-white/40" /></div>
                                         <Input value={pub.product_data.brand || ''} onChange={(e) => handleUpdate(pub.id, { product_data: { ...pub.product_data, brand: e.target.value } }, true)} placeholder="Ej. Apple" className="h-8 bg-black/40 border-white/5 text-xs text-white focus:ring-white/20" />
                                       </div>
                                       <div className="grid gap-2">
-                                        <div className="flex justify-between items-center"><Label className="text-[10px] text-gray-500">{t('stock')}</Label><input type="checkbox" checked={isFieldEnabled(pub, 'stock')} onChange={() => toggleField(pub, 'stock')} className="h-2 w-2 accent-white/40" /></div>
+                                        <div className="flex justify-between items-center"><Label className="text-[10px] text-gray-500">Stock</Label><input type="checkbox" checked={isFieldEnabled(pub, 'stock')} onChange={() => toggleField(pub, 'stock')} className="h-2 w-2 accent-white/40" /></div>
                                         <Input value={pub.product_data.stock || ''} onChange={(e) => handleUpdate(pub.id, { product_data: { ...pub.product_data, stock: e.target.value } }, true)} placeholder="Q" className="h-8 bg-black/40 border-white/5 text-xs text-white focus:ring-white/20" />
                                       </div>
                                     </div>
 
                                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                       <div className="grid gap-2">
-                                        <div className="flex justify-between items-center"><Label className="text-[10px] text-gray-500">{t('model')}</Label><input type="checkbox" checked={isFieldEnabled(pub, 'model')} onChange={() => toggleField(pub, 'model')} className="h-2 w-2 accent-white/40" /></div>
+                                        <div className="flex justify-between items-center"><Label className="text-[10px] text-gray-500">Modelo</Label><input type="checkbox" checked={isFieldEnabled(pub, 'model')} onChange={() => toggleField(pub, 'model')} className="h-2 w-2 accent-white/40" /></div>
                                         <Input value={pub.product_data.model || ''} onChange={(e) => handleUpdate(pub.id, { product_data: { ...pub.product_data, model: e.target.value } }, true)} placeholder="Ej. iPhone 15" className="h-8 bg-black/40 border-white/5 text-xs text-white focus:ring-white/20" />
                                       </div>
                                       <div className="grid gap-2">
-                                        <div className="flex justify-between items-center"><Label className="text-[10px] text-gray-500">{t('category')}</Label><input type="checkbox" checked={isFieldEnabled(pub, 'category')} onChange={() => toggleField(pub, 'category')} className="h-2 w-2 accent-white/40" /></div>
+                                        <div className="flex justify-between items-center"><Label className="text-[10px] text-gray-500">Categoría</Label><input type="checkbox" checked={isFieldEnabled(pub, 'category')} onChange={() => toggleField(pub, 'category')} className="h-2 w-2 accent-white/40" /></div>
                                         <Input value={pub.product_data.category || ''} onChange={(e) => handleUpdate(pub.id, { product_data: { ...pub.product_data, category: e.target.value } }, true)} placeholder="Ej. Electrónica" className="h-8 bg-black/40 border-white/5 text-xs text-white focus:ring-white/20" />
                                       </div>
                                     </div>
 
                                     <div className="p-3 rounded-lg bg-white/[0.02] border border-white/5 space-y-3">
                                       <div className="flex items-center justify-between">
-                                        <Label className="text-[10px] text-gray-400">{t('condition')}</Label>
+                                        <Label className="text-[10px] text-gray-400">Condición</Label>
                                         <div className="flex gap-2">
-                                          <Badge onClick={() => handleUpdate(pub.id, { product_data: { ...pub.product_data, condition: 'new' } })} className={`text-[9px] px-2 py-0 cursor-pointer ${pub.product_data.condition === 'new' ? 'bg-white text-black' : 'bg-transparent border border-white/10 text-gray-600'}`}>{t('new')}</Badge>
-                                          <Badge onClick={() => handleUpdate(pub.id, { product_data: { ...pub.product_data, condition: 'used' } })} className={`text-[9px] px-2 py-0 cursor-pointer ${pub.product_data.condition === 'used' ? 'bg-white text-black' : 'bg-transparent border border-white/10 text-gray-600'}`}>{t('used')}</Badge>
+                                          <Badge onClick={() => handleUpdate(pub.id, { product_data: { ...pub.product_data, condition: 'new' } })} className={`text-[9px] px-2 py-0 cursor-pointer ${pub.product_data.condition === 'new' ? 'bg-white text-black' : 'bg-transparent border border-white/10 text-gray-600'}`}>Nuevo</Badge>
+                                          <Badge onClick={() => handleUpdate(pub.id, { product_data: { ...pub.product_data, condition: 'used' } })} className={`text-[9px] px-2 py-0 cursor-pointer ${pub.product_data.condition === 'used' ? 'bg-white text-black' : 'bg-transparent border border-white/10 text-gray-600'}`}>Usado</Badge>
                                         </div>
                                       </div>
 
                                       <div className="flex items-center justify-between">
-                                        <Label className="text-[10px] text-gray-400">{t('freeShipping')}</Label>
+                                        <Label className="text-[10px] text-gray-400">Envío Gratis</Label>
                                         <input
                                           type="checkbox"
                                           checked={pub.product_data.shipping === 'free'}
@@ -1139,7 +1135,7 @@ export default function PublicationsPage() {
                                       </div>
 
                                       <div className="flex items-center justify-between">
-                                        <Label className="text-[10px] text-gray-400">{t('msi')}</Label>
+                                        <Label className="text-[10px] text-gray-400">MSI (Cuotas Sin Interés)</Label>
                                         <input
                                           type="checkbox"
                                           checked={pub.product_data.msi || false}
@@ -1150,7 +1146,7 @@ export default function PublicationsPage() {
 
                                       <div className="grid gap-2">
                                         <div className="flex justify-between items-center">
-                                          <Label className="text-[10px] text-gray-400">{t('warrantyMonths')}</Label>
+                                          <Label className="text-[10px] text-gray-400">Meses de Garantía</Label>
                                           <input
                                             type="checkbox"
                                             checked={isFieldEnabled(pub, 'warranty')}
@@ -1163,7 +1159,7 @@ export default function PublicationsPage() {
                                           onChange={(e) => handleUpdate(pub.id, {
                                             product_data: { ...pub.product_data, warranty: e.target.value }
                                           }, true)}
-                                          placeholder={t('warrantyPlaceholder')}
+                                          placeholder=Número de meses
                                           className="h-8 bg-black/40 border-white/10 text-xs text-white focus:ring-white/20 outline-none"
                                         />
                                       </div>
@@ -1180,14 +1176,14 @@ export default function PublicationsPage() {
                             className={`w-full h-12 text-md font-bold transition-all ${(!pub.product_data.imageUrl || !pub.name?.trim() || !pub.platform) ? 'bg-gray-800 text-gray-500 cursor-not-allowed' : 'bg-white hover:bg-zinc-200 text-black shadow-[0_0_20px_rgba(255,255,255,0.1)]'}`}
                           >
                             {isOptimizing === pub.id ? (
-                              <><Loader2 className="mr-2 h-5 w-5 animate-spin" /> {t('optimizing')}</>
+                              <><Loader2 className="mr-2 h-5 w-5 animate-spin" /> Optimizando</>
                             ) : (
-                              <><a className="mr-2 h-5 w-5" />{t('optimizePublication')}</>
+                              <><a className="mr-2 h-5 w-5" />Optimizar Publicación</>
                             )}
                           </Button>
                           <div className="text-center space-y-1">
                             {(!pub.product_data.imageUrl || !pub.name?.trim() || !pub.platform) && (
-                              <p className="text-[10px] text-red-400/60">{t('requiredFieldsWarning')}</p>
+                              <p className="text-[10px] text-red-400/60">Por favor completa los campos requeridos antes de optimizar</p>
                             )}
                             {!isPro && (
                               <p className="text-[11px] font-medium text-gray-400">
@@ -1197,7 +1193,7 @@ export default function PublicationsPage() {
                         </div>
                         {/* Result Section */}
                         <div className="space-y-6">
-                          <h4 className="text-sm font-semibold text-gray-400 uppercase tracking-wider">{t('optimizedContent')}</h4>
+                          <h4 className="text-sm font-semibold text-gray-400 uppercase tracking-wider">Contenido Optimizado</h4>
 
                           {pub.optimized_content.title ? (
                             <div className="space-y-4 p-4 rounded-xl bg-white/5 border border-white/10 animate-fade-in shadow-[0_8px_30px_rgb(0,0,0,0.12)]">
@@ -1205,7 +1201,7 @@ export default function PublicationsPage() {
                               {/* 1. Hero Image (Portada) */}
                               <div className="space-y-3">
                                 <div className="flex items-center justify-between">
-                                  <Label className="text-[10px] text-white uppercase font-bold tracking-wider">{t('optimizedPreview')}</Label>
+                                  <Label className="text-[10px] text-white uppercase font-bold tracking-wider">Vista Previa Optimizada</Label>
                                 </div>
                                 <div className="group relative aspect-video rounded-lg border border-white/10 bg-white/5 overflow-hidden shadow-inner font-mono">
                                   {pub.optimized_content.imageUrl || pub.product_data.imageUrl ? (
@@ -1232,7 +1228,7 @@ export default function PublicationsPage() {
                                     </>
                                   ) : (
                                     <div className="h-full w-full flex items-center justify-center">
-                                      <span className="text-[10px] text-gray-700">{t('noImage')}</span>
+                                      <span className="text-[10px] text-gray-700">Sin imagen</span>
                                     </div>
                                   )}
                                 </div>
@@ -1242,7 +1238,7 @@ export default function PublicationsPage() {
                               {((pub.optimized_content.additionalOptimizedImages && pub.optimized_content.additionalOptimizedImages.length > 0) || (pub.product_data.additionalImages && pub.product_data.additionalImages.length > 0)) && (
                                 <div className="space-y-3 pt-2 border-t border-white/5">
                                   <div className="flex items-center justify-between">
-                                    <Label className="text-[10px] text-white uppercase font-bold tracking-wider">{t('additionalImagesResult')}</Label>
+                                    <Label className="text-[10px] text-white uppercase font-bold tracking-wider">Imágenes Adicionales Optimizadas</Label>
                                   </div>
 
                                   <div className="grid grid-cols-4 gap-2">
@@ -1273,7 +1269,7 @@ export default function PublicationsPage() {
                               {/* 3. Precio Sugerido */}
                               <div className="p-4 rounded-lg bg-white/5 border border-white/10 shadow-sm mt-4">
                                 <div className="flex items-center justify-between mb-1">
-                                  <Label className="text-[10px] text-white uppercase font-bold tracking-wider text-xs">{t('suggestedPrice')}</Label>
+                                  <Label className="text-[10px] text-white uppercase font-bold tracking-wider text-xs">Precio Sugerido</Label>
                                 </div>
                                 <div className="flex items-center gap-3">
                                   <span className="text-3xl font-semibold text-white tracking-tight">
@@ -1289,7 +1285,7 @@ export default function PublicationsPage() {
                               {/* 4. Título */}
                               <div className="space-y-2 pt-4 border-t border-white/5">
                                 <div className="flex items-center justify-between">
-                                  <Label className="text-[10px] text-white uppercase font-bold">{t('optimizedTitle')}</Label>
+                                  <Label className="text-[10px] text-white uppercase font-bold">Título Optimizado</Label>
                                   <div className="flex items-center gap-2">
                                     {isPro && pub.optimized_content.optimizationState && (
                                       <Badge variant="outline" className="text-[10px] py-0 px-2 border-emerald-500/30 text-emerald-400 bg-emerald-500/10">
@@ -1312,7 +1308,7 @@ export default function PublicationsPage() {
                               {/* 5. Descripción */}
                               <div className="space-y-2 pt-4 border-t border-white/5 pb-2">
                                 <div className="flex items-center justify-between">
-                                  <Label className="text-[10px] text-white uppercase font-bold">{t('strategicDescription')}</Label>
+                                  <Label className="text-[10px] text-white uppercase font-bold">Descripción Estratégica</Label>
                                   <Button
                                     variant="ghost"
                                     size="icon"
@@ -1329,7 +1325,7 @@ export default function PublicationsPage() {
 
                               <div className="flex items-center gap-2 flex-wrap pt-4">
                                 <p className="text-[10px] text-white uppercase font-bold">
-                                  {t('aiModelUsed')}
+                                  Modelo IA Utilizado:
                                 </p>
                                 {pub.optimized_content.modelUsed && (
                                   <a
@@ -1348,7 +1344,7 @@ export default function PublicationsPage() {
                             </div>
                           ) : (
                             <div className="h-[250px] border border-dashed border-white/5 rounded-xl flex flex-col items-center justify-center text-center p-6 bg-white/[0.01]">
-                              <p className="text-gray-500 text-sm">{t('selectPlatformPrompt')}</p>
+                              <p className="text-gray-500 text-sm">Selecciona una plataforma para ver el contenido optimizado</p>
                             </div>
                           )}
                         </div>
@@ -1366,14 +1362,14 @@ export default function PublicationsPage() {
       <Dialog open={isCreateModalOpen} onOpenChange={setIsCreateModalOpen}>
         <DialogContent className="bg-[#0a0a0a] border-white/10 text-white sm:max-w-md">
           <DialogHeader>
-            <DialogTitle>{t('newPublicationDialog')}</DialogTitle>
+            <DialogTitle>Nueva Publicación</DialogTitle>
           </DialogHeader>
           <div className="py-4 space-y-4">
             <div className="grid gap-2">
-              <Label htmlFor="name" className="text-gray-300">{t('nameYourPublication')}</Label>
+              <Label htmlFor="name" className="text-gray-300">Nombre de tu Publicación</Label>
               <Input
                 id="name"
-                placeholder={t('namePlaceholder')}
+                placeholder=Ej. iPhone 15 Pro Max
                 value={newPubName}
                 onChange={(e) => setNewPubName(e.target.value)}
                 onKeyDown={(e) => e.key === 'Enter' && handleCreate()}
@@ -1384,10 +1380,10 @@ export default function PublicationsPage() {
           </div>
           <DialogFooter>
             <Button variant="ghost" onClick={() => setIsCreateModalOpen(false)} className="text-gray-400 hover:text-white">
-              {tc('cancel')}
+              Cancelar
             </Button>
             <Button onClick={handleCreate} disabled={!newPubName.trim()} className="bg-white text-black hover:bg-gray-200">
-              {tc('create')}
+              Crear
             </Button>
           </DialogFooter>
         </DialogContent>

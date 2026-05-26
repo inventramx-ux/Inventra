@@ -1,6 +1,5 @@
 "use client"
 import { useState, useEffect } from "react"
-import { useTranslations } from 'next-intl'
 
 import {
     LayoutDashboard,
@@ -49,29 +48,29 @@ import {
     TooltipTrigger,
 } from "@/components/ui/tooltip"
 
-const freeItemKeys = [
+const freeItems = [
     {
-        titleKey: "dashboard" as const,
+        title: "Panel",
         url: "/dashboard",
         icon: LayoutDashboard,
     },
     {
-        titleKey: "publications" as const,
+        title: "Publicaciones",
         url: "/dashboard/publications",
         icon: ShoppingBag,
     },
     {
-        titleKey: "analytics" as const,
+        title: "Análisis",
         url: "/dashboard/analytics",
         icon: BarChart3,
     },
     {
-        titleKey: "guide" as const,
+        title: "Guía",
         url: "/dashboard/guide",
         icon: BookOpen,
     },
     {
-        titleKey: "settings" as const,
+        title: "Configuración",
         url: "/dashboard/settings",
         icon: Settings,
     },
@@ -83,8 +82,6 @@ export function AppSidebar() {
     const { isPro } = useSubscription()
     const [copied, setCopied] = useState(false)
     const [publications, setPublications] = useState<Publication[]>([])
-    const t = useTranslations('sidebar')
-    const tc = useTranslations('common')
 
     // Load publications for progress bar
     useEffect(() => {
@@ -146,30 +143,27 @@ export function AppSidebar() {
                     <SidebarGroupLabel className="text-gray-400">
                         <div className="flex items-center gap-2">
                             {isPro && <Crown className="size-3 text-amber-400" />}
-                            <span>{isPro ? "Pro" : t('general')}</span>
+                            <span>{isPro ? "Pro" : "General"}</span>
                         </div>
                     </SidebarGroupLabel>
                     <SidebarGroupContent>
                         <SidebarMenu>
-                            {freeItemKeys.map((item) => {
-                                const title = t(item.titleKey);
-                                return (
-                                <SidebarMenuItem key={item.titleKey}>
+                            {freeItems.map((item) => (
+                                <SidebarMenuItem key={item.url}>
                                     <SidebarMenuButton
                                         asChild
-                                        tooltip={title}
+                                        tooltip={item.title}
                                         isActive={isActive(item.url)}
                                         className="text-gray-300 hover:text-white hover:bg-white/10"
                                     >
                                         <Link href={item.url}>
                                             <item.icon />
-                                            <span>{title}</span>
+                                            <span>{item.title}</span>
                                             <ChevronRight className="size-3.5 text-zinc-500 shrink-0 ml-auto group-data-[state=collapsed]:hidden" />
                                         </Link>
                                     </SidebarMenuButton>
                                 </SidebarMenuItem>
-                                );
-                            })}
+                            ))}
                         </SidebarMenu>
                     </SidebarGroupContent>
                 </SidebarGroup>
@@ -178,13 +172,13 @@ export function AppSidebar() {
 
                 {/* Support Section */}
                 <SidebarGroup>
-                    <SidebarGroupLabel className="text-gray-400">{t('support')}</SidebarGroupLabel>
+                    <SidebarGroupLabel className="text-gray-400">Soporte</SidebarGroupLabel>
                     <SidebarGroupContent>
                         <SidebarMenu>
                             <SidebarMenuItem>
                                 <SidebarMenuButton
                                     asChild
-                                    tooltip={t('support')}
+                                    tooltip="Soporte"
                                     className="text-gray-300 hover:text-white hover:bg-white/10 h-auto py-2"
                                 >
                                     <a href="mailto:inventramx@gmail.com" className="flex items-start gap-3 min-w-0 w-full">
@@ -192,12 +186,12 @@ export function AppSidebar() {
                                             <Mail className="size-4" />
                                         </div>
                                         <div className="flex flex-col gap-0.5 min-w-0">
-                                            <span className="text-sm font-medium truncate">{t('contact')}</span>
+                                            <span className="text-sm font-medium truncate">Contacto</span>
                                             <span className="text-[10px] text-blue-400 truncate font-mono">
                                                 inventramx@gmail.com
                                             </span>
                                             <span className="text-[9px] text-gray-500 leading-tight truncate">
-                                                {t('responseLess12h')}
+                                                Respuesta en menos de 12 horas
                                             </span>
                                         </div>
                                     </a>
@@ -215,7 +209,7 @@ export function AppSidebar() {
                                             )}
                                         </SidebarMenuAction>
                                     </TooltipTrigger>
-                                    <TooltipContent side="right">{t('copyEmail')}</TooltipContent>
+                                    <TooltipContent side="right">Copiar correo</TooltipContent>
                                 </Tooltip>
                             </SidebarMenuItem>
                         </SidebarMenu>
@@ -253,7 +247,7 @@ export function AppSidebar() {
                             />
                             <div className="grid flex-1 text-left text-sm leading-tight ml-2">
                                 <span className="truncate font-semibold text-white">
-                                    {user?.firstName || user?.username || tc('user')}
+                                    {user?.firstName || user?.username || "Usuario"}
                                 </span>
                                 <span className="truncate text-xs text-gray-400">
                                     {user?.primaryEmailAddress?.emailAddress || ""}

@@ -5,7 +5,6 @@ import { Publication } from "@/lib/publications"
 import { analyzePublication, getScoreColor } from "@/lib/publication-score"
 import { Card, CardContent, CardHeader } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { useTranslations } from "next-intl"
 
 // ---------------------------------------------------------------------------
 // Score ring — CSS conic-gradient, no extra chart library
@@ -83,10 +82,20 @@ interface PublicationAnalyticsCardProps {
 }
 
 export function PublicationAnalyticsCard({ publication }: PublicationAnalyticsCardProps) {
-  const t = useTranslations("analytics")
-
   const analysis = useMemo(() => analyzePublication(publication), [publication])
   const scoreColor = getScoreColor(analysis.score)
+
+  // Spanish suggestion translations
+  const suggestionTexts: Record<string, string> = {
+    'missingTitle': 'Añade un título más descriptivo',
+    'shortDescription': 'Aumenta la longitud de tu descripción',
+    'noImages': 'Añade imágenes de alta calidad',
+    'lowPrice': 'Verifica que tu precio sea competitivo',
+    'missingCategory': 'Selecciona una categoría apropiada',
+    'poorImageQuality': 'Mejora la calidad de tus imágenes',
+    'noKeywords': 'Añade palabras clave relevantes',
+    'highPrice': 'Considera reducir el precio',
+  };
 
   return (
     <Card className="bg-white/5 border-white/10 hover:bg-white/[0.07] transition-colors">
@@ -108,7 +117,7 @@ export function PublicationAnalyticsCard({ publication }: PublicationAnalyticsCa
         {/* Best platforms */}
         <div>
           <div className="mb-2">
-            <span className="text-xs font-medium text-gray-300">{t("bestPlatforms")}</span>
+            <span className="text-xs font-medium text-gray-300">Mejores Plataformas</span>
           </div>
           <div className="flex flex-col gap-1.5">
             {analysis.bestPlatforms.map((p, i) => (
@@ -121,11 +130,11 @@ export function PublicationAnalyticsCard({ publication }: PublicationAnalyticsCa
         {analysis.suggestionKeys.length > 0 && (
           <div>
             <div className="mb-2">
-              <span className="text-xs font-medium text-gray-300">{t("suggestions")}</span>
+              <span className="text-xs font-medium text-gray-300">Sugerencias</span>
             </div>
             <ul className="space-y-2 text-[11px] text-gray-400 leading-snug pl-0">
               {analysis.suggestionKeys.slice(0, 4).map((key) => (
-                <li key={key}>{t(key as any)}</li>
+                <li key={key}>{suggestionTexts[key as keyof typeof suggestionTexts] || key}</li>
               ))}
             </ul>
           </div>
@@ -133,7 +142,7 @@ export function PublicationAnalyticsCard({ publication }: PublicationAnalyticsCa
 
         {analysis.suggestionKeys.length === 0 && (
           <div>
-            <span className="text-xs text-emerald-400">Listing fully optimized</span>
+            <span className="text-xs text-emerald-400">Anuncio completamente optimizado</span>
           </div>
         )}
       </CardContent>
@@ -150,34 +159,32 @@ interface PublicationAnalyticsSectionProps {
 }
 
 export function PublicationAnalyticsSection({ publications, isPro }: PublicationAnalyticsSectionProps) {
-  const t = useTranslations("analytics")
-
   return (
     <div className="space-y-4">
       {/* Section header */}
       <div>
-        <h2 className="text-lg font-semibold text-white">{t("pubAnalytics")}</h2>
-        <p className="text-sm text-gray-400 mt-0.5">{t("pubAnalyticsSubtitle")}</p>
+        <h2 className="text-lg font-semibold text-white">Análisis de Publicaciones</h2>
+        <p className="text-sm text-gray-400 mt-0.5">Revisa cómo se desempeñan tus anuncios</p>
       </div>
 
       {/* Pro gate */}
       <div className="relative">
         {!isPro && (
           <div className="absolute inset-0 z-10 flex flex-col items-center justify-center bg-black/60 backdrop-blur-sm rounded-xl p-6 text-center">
-            <h3 className="text-blue-400 font-semibold mb-1">{t("proSectionPubs")}</h3>
-            <p className="text-blue-400/80 text-sm mb-4 max-w-xs">{t("proSectionPubsDesc")}</p>
+            <h3 className="text-blue-400 font-semibold mb-1">Función Pro</h3>
+            <p className="text-blue-400/80 text-sm mb-4 max-w-xs">Actualiza a Pro para ver el análisis detallado de tus publicaciones</p>
             <a
               href="/dashboard/upgrade"
               className="px-4 py-1.5 rounded-lg bg-blue-400 hover:bg-blue-500 text-black text-xs font-bold transition-colors"
             >
-              {t("upgradeNow")}
+              Actualizar Ahora
             </a>
           </div>
         )}
 
         <div className={!isPro ? "blur-[3px] pointer-events-none select-none" : ""}>
           {publications.length === 0 ? (
-            <p className="text-gray-500 text-sm py-8 text-center">{t("noPubs")}</p>
+            <p className="text-gray-500 text-sm py-8 text-center">No hay publicaciones</p>
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
               {publications.map((pub) => (

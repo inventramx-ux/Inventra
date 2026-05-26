@@ -7,8 +7,6 @@ import "./globals.css";
 import { Analytics } from "@vercel/analytics/next"
 import { ClientProvider } from "./contexts/ClientContext"
 import { CurrencyProvider } from "./contexts/CurrencyContext"
-import { NextIntlClientProvider } from 'next-intl';
-import { getLocale, getMessages } from 'next-intl/server';
 import CookieConsent from "@/app/components/CookieConsent";
 
 const inter = Inter({
@@ -31,23 +29,18 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const locale = await getLocale();
-  const messages = await getMessages();
-
   return (
-    <html lang={locale}>
+    <html lang="es">
 
       <body className={`${inter.variable} ${geistMono.variable} antialiased font-sans`}>
         <ClerkProvider>
-          <NextIntlClientProvider messages={messages} locale={locale}>
-            <ClientProvider>
-              <CurrencyProvider>
-                {children}
-                <Analytics />
-                <CookieConsent />
-              </CurrencyProvider>
-            </ClientProvider>
-          </NextIntlClientProvider>
+          <ClientProvider>
+            <CurrencyProvider>
+              {children}
+              <Analytics />
+              <CookieConsent />
+            </CurrencyProvider>
+          </ClientProvider>
         </ClerkProvider>
       </body>
     </html>
